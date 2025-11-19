@@ -16,7 +16,7 @@ export interface DashboardStatsResponse {
 })
 export class DashboardService {
   // 👇 IMPORTANTE: URL ABSOLUTA AL BACKEND
-  private baseUrl = '${environment.apiUrl}/api/dashboard';
+  private baseUrl = `${environment.apiUrl}/api/dashboard`;
 
   constructor(private http: HttpClient) {}
 
