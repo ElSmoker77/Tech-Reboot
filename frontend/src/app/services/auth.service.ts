@@ -2,7 +2,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
-import { environment } from '../../environments/environment.prod';
 
 interface RegisterPayload {
   nombre: string;
@@ -28,11 +27,12 @@ interface AuthResponse {
   providedIn: 'root'
 })
 export class AuthService {
-  // 👀 Asegúrate que tu backend realmente corre en http://localhost:4000
-  // y que montaste las rutas como: app.use('/api/auth', authRoutes)
-  private apiUrl = '${environment.apiUrl}/api/auth';
+  // ✅ URL FIJA DEL BACKEND (Render)
+  private apiUrl = 'https://tech-reboot.onrender.com/api/auth';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    console.log('🔧 [AuthService] apiUrl =', this.apiUrl);
+  }
 
   private normalizarCorreo(value: string | undefined): string {
     return value?.trim().toLowerCase() ?? '';
@@ -45,6 +45,8 @@ export class AuthService {
       correo: this.normalizarCorreo(user.correo ?? user.email),
       password: user.password
     };
+
+    console.log('📨 [AuthService] POST /register →', `${this.apiUrl}/register`, payload);
 
     return lastValueFrom(
       this.http.post<AuthResponse>(`${this.apiUrl}/register`, payload, {
@@ -59,6 +61,8 @@ export class AuthService {
       correo: this.normalizarCorreo(credentials.correo ?? credentials.email),
       password: credentials.password
     };
+
+    console.log('📨 [AuthService] POST /login →', `${this.apiUrl}/login`, payload);
 
     return lastValueFrom(
       this.http.post<AuthResponse>(`${this.apiUrl}/login`, payload, {
@@ -82,12 +86,14 @@ export class AuthService {
     });
 
     try {
+      console.log('📨 [AuthService] GET /me →', `${this.apiUrl}/me`);
       const res = await lastValueFrom(
         this.http.get<AuthResponse>(`${this.apiUrl}/me`, { headers })
       );
-      return res; // { id?, nombre?, correo?, rol?, esAdmin? }
+      console.log('✅ [AuthService] Respuesta /me:', res);
+      return res;
     } catch (err) {
-      console.error('Error al obtener /auth/me:', err);
+      console.error('❌ [AuthService] Error al obtener /auth/me:', err);
       return null;
     }
   }
@@ -104,6 +110,7 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('usuario');
-    // aquí podrías borrar más cosas si las usas
+    localStorage.removeItem('rol');
+    localStorage.removeItem('esAdmin');
   }
 }
