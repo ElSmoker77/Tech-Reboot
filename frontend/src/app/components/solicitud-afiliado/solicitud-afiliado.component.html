@@ -1,0 +1,360 @@
+<div class="min-h-screen bg-gradient-to-b from-green-50 to-white py-8">
+  <div class="container mx-auto max-w-4xl px-4">
+    <!-- Header -->
+    <div class="text-center mb-8">
+      <h1 class="text-4xl font-bold text-green-700 mb-2">
+        <i class="bi bi-person-plus me-2"></i>
+        Solicitud de Afiliado
+      </h1>
+      <p class="text-gray-600">
+        Completa el formulario para solicitar ser un punto de acopio afiliado
+      </p>
+    </div>
+
+    <!-- Vista de Usuario: Formulario de Solicitud -->
+    <div>
+      <!-- Card principal -->
+      <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 md:p-8">
+        <!-- Información importante -->
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6 rounded">
+          <h3 class="font-semibold text-blue-800 mb-2">
+            <i class="bi bi-info-circle me-2"></i>Información importante
+          </h3>
+          <p class="text-sm text-blue-700">
+            Al convertirte en punto de acopio afiliado, te comprometes a recibir, almacenar y gestionar
+            residuos electrónicos de manera responsable. Tu solicitud será revisada y te contactaremos
+            para coordinar los siguientes pasos.
+          </p>
+        </div>
+
+        <!-- Formulario -->
+        <form (ngSubmit)="enviar(form)" #form="ngForm" novalidate>
+          <!-- Datos personales -->
+          <section class="mb-8">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4 border-b pb-2">
+              <i class="bi bi-person-fill me-2 text-green-600"></i>Datos Personales
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Nombre completo <span class="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                  [(ngModel)]="solicitud.nombreCompleto"
+                  name="nombreCompleto"
+                  placeholder="Juan Pérez"
+                  required
+                  [ngClass]="{'border-red-500': form.submitted && !solicitud.nombreCompleto}"
+                />
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Correo electrónico <span class="text-red-500">*</span>
+                </label>
+                <input
+                  type="email"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                  [(ngModel)]="solicitud.correo"
+                  name="correo"
+                  placeholder="ejemplo@correo.com"
+                  required
+                  email
+                  [ngClass]="{'border-red-500': form.submitted && !solicitud.correo}"
+                />
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Teléfono <span class="text-red-500">*</span>
+                </label>
+                <input
+                  type="tel"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                  [(ngModel)]="solicitud.telefono"
+                  name="telefono"
+                  placeholder="+56 9 1234 5678"
+                  required
+                  [ngClass]="{'border-red-500': form.submitted && !solicitud.telefono}"
+                />
+              </div>
+            </div>
+          </section>
+
+          <!-- Ubicación del punto de acopio -->
+          <section class="mb-8">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4 border-b pb-2">
+              <i class="bi bi-geo-alt-fill me-2 text-green-600"></i>Ubicación del Punto de Acopio
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-4 mb-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Dirección <span class="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                  [(ngModel)]="solicitud.direccion"
+                  name="direccion"
+                  placeholder="Calle y número"
+                  required
+                  [ngClass]="{'border-red-500': form.submitted && !solicitud.direccion}"
+                />
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Ciudad <span class="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                  [(ngModel)]="solicitud.ciudad"
+                  name="ciudad"
+                  placeholder="Los Sauces"
+                  required
+                  [ngClass]="{'border-red-500': form.submitted && !solicitud.ciudad}"
+                />
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Región <span class="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                  [(ngModel)]="solicitud.region"
+                  name="region"
+                  placeholder="Araucanía"
+                  required
+                  [ngClass]="{'border-red-500': form.submitted && !solicitud.region}"
+                />
+              </div>
+            </div>
+          </section>
+
+          <!-- Información de la organización -->
+          <section class="mb-8">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4 border-b pb-2">
+              <i class="bi bi-building me-2 text-green-600"></i>Información de la Organización
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-4 mb-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Tipo de organización <span class="text-red-500">*</span>
+                </label>
+                <select
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                  [(ngModel)]="solicitud.tipoOrganizacion"
+                  name="tipoOrganizacion"
+                  required
+                  [ngClass]="{'border-red-500': form.submitted && !solicitud.tipoOrganizacion}"
+                >
+                  <option value="">Selecciona una opción</option>
+                  <option value="comunidad">Comunidad/Organización social</option>
+                  <option value="empresa">Empresa privada</option>
+                  <option value="institucion">Institución educativa</option>
+                  <option value="municipalidad">Municipalidad</option>
+                  <option value="otro">Otro</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Capacidad de almacenamiento <span class="text-red-500">*</span>
+                </label>
+                <select
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                  [(ngModel)]="solicitud.capacidadAlmacenamiento"
+                  name="capacidadAlmacenamiento"
+                  required
+                  [ngClass]="{'border-red-500': form.submitted && !solicitud.capacidadAlmacenamiento}"
+                >
+                  <option value="">Selecciona una opción</option>
+                  <option value="pequeño">Pequeño (hasta 50 kg)</option>
+                  <option value="mediano">Mediano (50-200 kg)</option>
+                  <option value="grande">Grande (más de 200 kg)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                Descripción de la organización <span class="text-red-500">*</span>
+              </label>
+              <textarea
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                [(ngModel)]="solicitud.descripcionOrganizacion"
+                name="descripcionOrganizacion"
+                rows="3"
+                placeholder="Describe brevemente tu organización y su propósito..."
+                required
+                [ngClass]="{'border-red-500': form.submitted && !solicitud.descripcionOrganizacion}"
+              ></textarea>
+            </div>
+          </section>
+
+          <!-- Experiencia y compromiso -->
+          <section class="mb-8">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4 border-b pb-2">
+              <i class="bi bi-check-circle-fill me-2 text-green-600"></i>Experiencia y Compromiso
+            </h2>
+
+            <div class="space-y-4">
+              <div class="flex items-start">
+                <input
+                  type="checkbox"
+                  id="experienciaReciclaje"
+                  [(ngModel)]="solicitud.experienciaReciclaje"
+                  name="experienciaReciclaje"
+                  class="mt-1 mr-3 h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded"
+                  required
+                />
+                <label for="experienciaReciclaje" class="text-sm text-gray-700">
+                  <span class="text-red-500">*</span> Confirmo que tengo experiencia previa en reciclaje o gestión de residuos
+                </label>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Certificaciones o acreditaciones (opcional)
+                </label>
+                <input
+                  type="text"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                  [(ngModel)]="solicitud.certificaciones"
+                  name="certificaciones"
+                  placeholder="Ej: Certificación ambiental, ISO, etc."
+                />
+              </div>
+
+              <div class="flex items-start">
+                <input
+                  type="checkbox"
+                  id="compromisoAmbiental"
+                  [(ngModel)]="solicitud.compromisoAmbiental"
+                  name="compromisoAmbiental"
+                  class="mt-1 mr-3 h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded"
+                  required
+                />
+                <label for="compromisoAmbiental" class="text-sm text-gray-700">
+                  <span class="text-red-500">*</span> Me comprometo a gestionar los residuos de manera responsable y ambientalmente sostenible
+                </label>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Disponibilidad horaria <span class="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                  [(ngModel)]="solicitud.disponibilidadHoraria"
+                  name="disponibilidadHoraria"
+                  placeholder="Ej: Lunes a Viernes, 9:00 - 18:00"
+                  required
+                  [ngClass]="{'border-red-500': form.submitted && !solicitud.disponibilidadHoraria}"
+                />
+              </div>
+            </div>
+          </section>
+
+          <!-- Requisitos -->
+          <section class="mb-8">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4 border-b pb-2">
+              <i class="bi bi-list-check me-2 text-green-600"></i>Requisitos para ser Afiliado
+            </h2>
+            <p class="text-sm text-gray-600 mb-4">
+              Debes cumplir con todos los siguientes requisitos para poder enviar tu solicitud:
+            </p>
+            <div class="space-y-3">
+              <div *ngFor="let requisito of requisitos" class="flex items-start">
+                <input
+                  type="checkbox"
+                  [id]="requisito.id"
+                  [(ngModel)]="requisito.checked"
+                  name="requisito-{{requisito.id}}"
+                  class="mt-1 mr-3 h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded"
+                />
+                <label [for]="requisito.id" class="text-sm text-gray-700">
+                  {{ requisito.label }}
+                </label>
+              </div>
+            </div>
+          </section>
+
+          <!-- Mensaje adicional -->
+          <section class="mb-8">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4 border-b pb-2">
+              <i class="bi bi-chat-dots me-2 text-green-600"></i>Mensaje Adicional
+            </h2>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                Información adicional (opcional)
+              </label>
+              <textarea
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                [(ngModel)]="solicitud.mensajeAdicional"
+                name="mensajeAdicional"
+                rows="4"
+                placeholder="Comparte cualquier información adicional que consideres relevante..."
+              ></textarea>
+            </div>
+          </section>
+
+          <!-- Botones -->
+          <div class="flex flex-col sm:flex-row gap-4 justify-end">
+            <button
+              *ngIf="auth.isLoggedIn()"
+              type="button"
+              (click)="logout()"
+              class="px-6 py-3 border border-red-300 rounded-lg text-red-700 hover:bg-red-50 transition"
+            >
+              <i class="bi bi-box-arrow-right me-2"></i>Cerrar sesión
+            </button>
+
+            <button
+              type="button"
+              (click)="volver()"
+              class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition"
+            >
+              <i class="bi bi-arrow-left me-2"></i>Volver
+            </button>
+
+            <button
+              type="submit"
+              [disabled]="isSubmitting"
+              class="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <span *ngIf="!isSubmitting">
+                <i class="bi bi-send-fill me-2"></i>Enviar Solicitud
+              </span>
+              <span *ngIf="isSubmitting">
+                <i class="bi bi-hourglass-split me-2"></i>Enviando...
+              </span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- Fin Vista de Usuario: Formulario -->
+  </div>
+
+  <!-- Toast de notificación -->
+  <div
+    *ngIf="toastVisible"
+    class="fixed bottom-4 right-4 z-50 animate-fade-in"
+    [ngClass]="toastTipo === 'success' ? 'bg-green-500' : 'bg-red-500'"
+  >
+    <div class="px-6 py-4 rounded-lg shadow-lg text-white flex items-center gap-3">
+      <i [ngClass]="toastTipo === 'success' ? 'bi-check-circle-fill' : 'bi-exclamation-triangle-fill'"></i>
+      <span>{{ toastMensaje }}</span>
+    </div>
+  </div>
+</div>

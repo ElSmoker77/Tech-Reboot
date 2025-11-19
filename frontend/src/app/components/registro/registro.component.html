@@ -1,0 +1,118 @@
+<div class="register-background">
+  <div class="gradient-layer"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+</div>
+
+<section class="register-shell">
+  <article class="registro-card animate__animated animate__fadeIn">
+    <div class="brand-pill">
+      <i class="bi bi-person-plus-fill"></i>
+      <span>Crear cuenta</span>
+    </div>
+
+    <h2>Activa tu perfil Tech Reboot</h2>
+    <p class="subtitle">
+      Completa tus datos para comenzar a registrar componentes y seguir su ciclo de vida.
+    </p>
+
+    <form (ngSubmit)="registrar(form)" #form="ngForm" novalidate>
+      <label class="field-label" for="nombre">Nombre completo</label>
+      <div class="input-wrapper" [ngClass]="{'has-error': form.submitted && !user.nombre}">
+        <i class="bi bi-person-fill"></i>
+        <input
+          type="text"
+          id="nombre"
+          name="nombre"
+          [(ngModel)]="user.nombre"
+          placeholder="Ej: Jean Herrera"
+          required
+        />
+      </div>
+      <small *ngIf="form.submitted && !user.nombre" class="helper-text">El nombre es obligatorio.</small>
+
+      <label class="field-label" for="correo">Correo electronico</label>
+      <div class="input-wrapper" [ngClass]="{'has-error': form.submitted && !user.correo}">
+        <i class="bi bi-envelope-open-fill"></i>
+        <input
+          type="email"
+          id="correo"
+          name="correo"
+          [(ngModel)]="user.correo"
+          placeholder="ejemplo@correo.com"
+          required
+        />
+      </div>
+      <small *ngIf="form.submitted && !user.correo" class="helper-text">Ingresa un correo valido.</small>
+
+      <label class="field-label" for="password">Contraseña</label>
+      <div class="input-wrapper" [ngClass]="{'has-error': form.submitted && !user.password}">
+        <i class="bi bi-shield-lock-fill"></i>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          [(ngModel)]="user.password"
+          placeholder="Minimo 6 caracteres"
+          minlength="6"
+          required
+        />
+      </div>
+      <small *ngIf="form.submitted && !user.password" class="helper-text">La contraseña es obligatoria.</small>
+
+      <div class="acciones">
+        <button type="submit" class="btn-primary" [disabled]="isSubmitting">
+          <span *ngIf="!isSubmitting">
+            <i class="bi bi-person-check-fill me-2"></i> Registrar usuario
+          </span>
+          <span *ngIf="isSubmitting" class="btn-spinner" aria-hidden="true"></span>
+        </button>
+        <button type="button" class="btn-ghost" (click)="volver()">
+          <i class="bi bi-arrow-left-circle me-2"></i> Volver
+        </button>
+      </div>
+    </form>
+
+    <div
+      *ngIf="mensaje"
+      class="status-banner"
+      [ngClass]="estadoMensaje === 'success' ? 'success' : 'error'"
+      role="alert"
+    >
+      <i class="bi" [ngClass]="estadoMensaje === 'success' ? 'bi-check-circle-fill' : 'bi-exclamation-circle-fill'"></i>
+      <span>{{ mensaje }}</span>
+    </div>
+  </article>
+
+  <aside class="register-panel animate__animated animate__fadeInUp">
+    <h3>Un registro pensado para el laboratorio</h3>
+    <p>
+      Manten sincronizados tus componentes con el flujo de reacondicionamiento. Asignamos cada
+      pieza a un responsable para que el seguimiento sea claro.
+    </p>
+
+    <ol class="steps">
+      <li>
+        <span class="step-number">1</span>
+        <div>
+          <h4>Ingresa tus datos</h4>
+          <p>Usamos tu correo institucional para identificarte dentro del sistema.</p>
+        </div>
+      </li>
+      <li>
+        <span class="step-number">2</span>
+        <div>
+          <h4>Registra componentes</h4>
+          <p>Agrega cada pieza indicando categoria, estado y responsable.</p>
+        </div>
+      </li>
+      <li>
+        <span class="step-number">3</span>
+        <div>
+          <h4>Monitorea avances</h4>
+          <p>Consulta el inventario filtrado por tu usuario y mantenga el control.</p>
+        </div>
+      </li>
+    </ol>
+  </aside>
+</section>

@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var RollMode = /*#__PURE__*/function (RollMode) {\n  RollMode[\"both\"] = \"both\";\n  RollMode[\"horizontal\"] = \"horizontal\";\n  RollMode[\"vertical\"] = \"vertical\";\n  return RollMode;\n}(RollMode || {});","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

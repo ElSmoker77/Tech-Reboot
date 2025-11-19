@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class EmitterShapeBase {\n  constructor(position, size, fill, options) {\n    this.position = position;\n    this.size = size;\n    this.fill = fill;\n    this.options = options;\n  }\n  resize(position, size) {\n    this.position = position;\n    this.size = size;\n  }\n}","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

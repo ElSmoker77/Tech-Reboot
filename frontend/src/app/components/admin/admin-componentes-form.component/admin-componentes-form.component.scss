@@ -1,0 +1,279 @@
+/* ============================
+   CONTENEDOR PRINCIPAL
+============================ */
+
+.componentes-section {
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 1300px;   /* 🔍 más ancho el área del formulario */
+  margin: 0 auto;      /* centrado */
+}
+
+/* ============================
+   HEADER DEL FORM
+============================ */
+
+.componentes-form__header {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-bottom: 1.1rem;
+}
+
+.header-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #16a34a, #065f46);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: #ffffff;
+  animation: float 3s ease-in-out infinite;
+  box-shadow: 0 0 18px rgba(34, 197, 94, 0.7);
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+  100% { transform: translateY(0); }
+}
+
+.componentes-form__header h2 {
+  font-weight: 700;
+  font-size: 1.35rem;
+  color: #bbf7d0;
+}
+
+.componentes-form__subtitle {
+  margin-top: .2rem;
+  font-size: .88rem;
+  color: #ffffff;  /* blanco */
+}
+
+/* ============================
+   GRID DEL FORMULARIO
+============================ */
+
+.componentes-form .row.g-3 {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1.1fr)); /* 💡 columnas un poco más anchas */
+  column-gap: 2rem;   /* más espacio entre columnas */
+  row-gap: 1rem;
+}
+
+/* por si queda alguna .col- de bootstrap */
+.componentes-form .row.g-3 > [class*='col-'] {
+  width: 100%;
+}
+
+/* 💥 Descripción SIEMPRE ocupa las 2 columnas */
+.componentes-form .campo-descripcion,
+.componentes-form .form-group-descripcion {
+  grid-column: 1 / -1 !important;
+}
+
+/* ============================
+   LABELS
+============================ */
+
+.form-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #d1fae5;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.form-label i {
+  color: #22c55e;
+}
+
+/* ============================
+   INPUTS / SELECTS / TEXTAREA
+============================ */
+
+.componentes-form .form-control,
+.componentes-form .form-select,
+.componentes-form textarea {
+  background-color: rgba(15, 23, 42, 0.9);
+  color: #e5e7eb;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  padding: 0.45rem 0.85rem;     /* 👈 altura original, no la toco */
+  transition: 0.15s ease;
+  width: 70%;
+}
+
+.componentes-form .form-control::placeholder,
+.componentes-form .form-select::placeholder,
+.componentes-form textarea::placeholder {
+  color: #6b7280;
+}
+
+.componentes-form .form-control:focus,
+.componentes-form .form-select:focus,
+.componentes-form textarea:focus {
+  background-color: #020617;
+  border-color: #22c55e;
+  box-shadow: 0 0 0 1px #22c55e, 0 0 0 4px rgba(34, 197, 94, 0.28);
+  transform: translateY(-1px);
+}
+
+/* textos de ayuda blancos por defecto */
+.componentes-form .form-text {
+  color: #ffffff;
+}
+
+/* TEXTAREA ESPECIAL (DESCRIPCIÓN) */
+.form-group-descripcion textarea.form-control {
+  min-height: 130px;
+  border-radius: 16px;
+  border: 1px solid rgba(34, 197, 94, 0.55);
+  background: radial-gradient(
+    circle at top left,
+    rgba(34, 197, 94, 0.15),
+    rgba(15, 23, 42, 0.95)
+  );
+  width: 100%;      /* ocupa todo el ancho del grid (las 2 columnas) */
+  display: block;
+}
+
+/* helper de descripción en morado suave */
+.form-group-descripcion .form-text {
+  color: #a5b4fc;
+  margin-top: 0.35rem;
+}
+
+/* ============================
+   BOTONES
+============================ */
+
+.componentes-form .btn {
+  border-radius: 999px;
+  font-weight: 600;
+  padding: 0.55rem 1rem;
+  transition: 0.15s ease;
+}
+
+.componentes-form .btn-success {
+  background: linear-gradient(135deg, #16a34a, #15803d);
+}
+
+.componentes-form .btn-success:hover {
+  background: linear-gradient(135deg, #22c55e, #15803d);
+}
+
+/* ============================
+   RESPONSIVE
+============================ */
+
+@media (max-width: 992px) {
+  .componentes-form .row.g-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .componentes-form .campo-descripcion,
+  .componentes-form .form-group-descripcion {
+    grid-column: 1 / -1 !important;
+  }
+}
+
+/* ============================
+   TOAST LOCAL FLOTANTE NEÓN
+============================ */
+
+.componentes-toast {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  padding: 0.7rem 1.2rem;
+  border-radius: 18px;
+
+  font-size: 0.9rem;
+  font-weight: 500;
+
+  color: #bbf7d0;
+  background: rgba(22, 163, 74, 0.18);
+  border: 1px solid rgba(34, 197, 94, 0.85);
+
+  box-shadow:
+    0 0 18px rgba(34, 197, 94, 0.8),
+    0 0 35px rgba(34, 197, 94, 0.6),
+    0 0 55px rgba(34, 197, 94, 0.4);
+  backdrop-filter: blur(6px);
+
+  animation: componentes-toast-in 0.25s ease-out;
+}
+
+.componentes-toast i {
+  color: #22c55e;
+  font-size: 1.1rem;
+}
+
+@keyframes componentes-toast-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 768px) {
+  .componentes-toast {
+    top: 1rem;
+    right: 0.75rem;
+    left: 0.75rem;
+    justify-content: center;
+  }
+}
+
+
+/* ============================
+   AJUSTES DE ANCHO Y ALTURA
+   (override)
+============================ */
+
+/* El formulario ocupa más ancho y menos alto total */
+.componentes-section {
+  width:auto;
+  max-width: 100%;      /* antes 1200/1300, ahora más ancho */
+  padding-top: 1rem;      /* un pelín menos de alto */
+  padding-bottom: 1rem;
+}
+
+/* Asegurar que la card/form use todo el ancho disponible de la sección */
+.componentes-form {
+  width: 100%;
+}
+
+/* Las columnas se abren más hacia los lados y hay menos espacio vertical */
+.componentes-form .row.g-3 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 6rem;       /* 💡 separa más las dos columnas → inputs más largos */
+  row-gap: 0.75rem;       /* un poco menos de alto entre filas */
+}
+
+/* Header un poco más compacto */
+.componentes-form__header {
+  margin-bottom: 0.7rem;  /* antes 1.1rem */
+}
+
+/* La descripción sigue ocupando las 2 columnas, pero más bajita */
+.form-group-descripcion textarea.form-control {
+  min-height: 90px;       /* antes 130px → menos alto en la parte de abajo */
+}
+
+
+

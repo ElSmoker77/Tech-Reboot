@@ -1,0 +1,92 @@
+<div class="contacto-wrapper animate__animated animate__fadeIn">
+  <div class="card shadow-lg border-0 rounded-4 mx-auto w-100" style="max-width: 600px; height: 100%;">
+    <div class="card-body p-4 d-flex flex-column justify-content-center h-100">
+      <h2 class="text-center text-success mb-4">
+        ¿Tienes material para entregar, quieres sumarte como punto de acopio
+        o proponer una colaboración?
+      </h2>
+      <h1>
+        <i class="bi bi-envelope-heart-fill me-2"></i>
+        Contáctanos
+      </h1>
+
+      <!-- ✅ Formulario -->
+      <form (ngSubmit)="enviar(form)" #form="ngForm" novalidate>
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Nombre</label>
+          <input
+            type="text"
+            class="form-control form-control-lg"
+            [(ngModel)]="contacto.nombre"
+            name="nombre"
+            placeholder="Escribe tu nombre"
+            required
+            [ngClass]="{'is-invalid': form.submitted && !contacto.nombre}"
+          />
+          <div *ngIf="form.submitted && !contacto.nombre" class="invalid-feedback">
+            El nombre es obligatorio.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Correo electrónico</label>
+          <input
+            type="email"
+            class="form-control form-control-lg"
+            [(ngModel)]="contacto.correo"
+            name="correo"
+            placeholder="ejemplo@correo.com"
+            required
+            email
+            [ngClass]="{'is-invalid': form.submitted && !contacto.correo}"
+          />
+          <div *ngIf="form.submitted && !contacto.correo" class="invalid-feedback">
+            Ingresa un correo válido.
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label fw-semibold">Mensaje</label>
+          <textarea
+            class="form-control"
+            [(ngModel)]="contacto.mensaje"
+            name="mensaje"
+            rows="4"
+            placeholder="Escribe tu mensaje..."
+            required
+            [ngClass]="{'is-invalid': form.submitted && !contacto.mensaje}"
+          ></textarea>
+          <div *ngIf="form.submitted && !contacto.mensaje" class="invalid-feedback">
+            El mensaje no puede estar vacío.
+          </div>
+        </div>
+
+        <!-- BOTÓN + MENSAJE DE PUNTO DE ACOPIO -->
+        <div class="d-flex flex-column flex-md-row align-items-md-center gap-2 mt-2">
+          <button type="submit" class="btn btn-success btn-lg">
+            <i class="bi bi-send-fill me-2"></i> Enviar mensaje
+          </button>
+
+          <p class="mb-0 text-muted small ms-md-3">
+            ¿Quieres ser punto de acopio?
+            <a
+              class="link-success fw-semibold"
+              style="cursor: pointer;"
+              (click)="irASolicitudAfiliado()"
+            >
+              Completa la solicitud aquí
+            </a>
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ✅ Toast de éxito -->
+  <div *ngIf="toastVisible" class="toast-container">
+    <div class="toast-message animate__animated animate__fadeInUp">
+      <i class="bi bi-check-circle-fill me-2"></i>
+      ¡Mensaje enviado correctamente!
+    </div>
+  </div>
+</div>

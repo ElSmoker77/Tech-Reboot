@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var DestroyType = /*#__PURE__*/function (DestroyType) {\n  DestroyType[\"none\"] = \"none\";\n  DestroyType[\"max\"] = \"max\";\n  DestroyType[\"min\"] = \"min\";\n  return DestroyType;\n}(DestroyType || {});","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

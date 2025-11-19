@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { drawLine } from \"./Utils.js\";\nconst sides = 1;\nexport class LineDrawer {\n  constructor() {\n    this.validTypes = [\"line\"];\n  }\n  draw(data) {\n    drawLine(data);\n  }\n  getSidesCount() {\n    return sides;\n  }\n}","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

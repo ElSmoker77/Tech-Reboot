@@ -1,0 +1,237 @@
+<section class="componentes-section">
+  <!-- IZQUIERDA: FORMULARIO -->
+  <div class="componentes-form">
+    <h2 class="text-center mb-3">
+      <i class="bi bi-cpu-fill me-2"></i> Registro de Componentes
+    </h2>
+
+    <form (ngSubmit)="guardar()" #form="ngForm" novalidate>
+      <div class="row g-3">
+        <!-- Nombre -->
+        <div class="col-md-6">
+          <label class="form-label">
+            <i class="bi bi-puzzle me-2 text-success"></i> Nombre
+          </label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="componente.nombre"
+            name="nombre"
+            placeholder="Ej: Fuente ATX 500W, Placa B450..."
+            required
+            [ngClass]="{'is-invalid': form.submitted && !componente.nombre}"
+          />
+          <div *ngIf="form.submitted && !componente.nombre" class="invalid-feedback">
+            El nombre es obligatorio.
+          </div>
+        </div>
+
+        <!-- Categoría -->
+        <div class="col-md-6">
+          <label class="form-label">
+            <i class="bi bi-tags-fill me-2 text-success"></i> Categoría
+          </label>
+          <select
+            class="form-select"
+            [(ngModel)]="componente.categoria"
+            name="categoria"
+            required
+            [ngClass]="{'is-invalid': form.submitted && !componente.categoria}"
+          >
+            <option value="">Seleccione...</option>
+            <option *ngFor="let cat of categorias" [value]="cat">{{ cat }}</option>
+          </select>
+          <div *ngIf="form.submitted && !componente.categoria" class="invalid-feedback">
+            Selecciona una categoría.
+          </div>
+        </div>
+
+        <!-- Estado -->
+        <div class="col-md-6">
+          <label class="form-label">
+            <i class="bi bi-recycle me-2 text-success"></i> Estado
+          </label>
+          <select
+            class="form-select"
+            [(ngModel)]="componente.estado"
+            name="estado"
+            required
+            [ngClass]="{'is-invalid': form.submitted && !componente.estado}"
+          >
+            <option value="">Seleccione...</option>
+            <option *ngFor="let est of estados" [value]="est">{{ est }}</option>
+          </select>
+          <div *ngIf="form.submitted && !componente.estado" class="invalid-feedback">
+            Selecciona un estado.
+          </div>
+        </div>
+
+        <!-- Ubicación -->
+        <div class="col-md-6">
+          <label class="form-label">
+            <i class="bi bi-geo-alt-fill me-2 text-success"></i> Ubicación
+          </label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="componente.ubicacion"
+            name="ubicacion"
+            placeholder="Ej: Almacén central / Punto Sur"
+          />
+        </div>
+
+        <!-- Fecha -->
+        <div class="col-md-6">
+          <label class="form-label">
+            <i class="bi bi-calendar-date-fill me-2 text-success"></i> Fecha de ingreso
+          </label>
+          <input
+            type="date"
+            class="form-control"
+            [(ngModel)]="componente.fechaIngreso"
+            name="fechaIngreso"
+            required
+            [ngClass]="{'is-invalid': form.submitted && !componente.fechaIngreso}"
+          />
+          <div *ngIf="form.submitted && !componente.fechaIngreso" class="invalid-feedback">
+            La fecha es obligatoria.
+          </div>
+        </div>
+
+        <!-- Responsable -->
+        <div class="col-md-6">
+          <label class="form-label">
+            <i class="bi bi-person-fill me-2 text-success"></i> Responsable
+          </label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="componente.responsable"
+            name="responsable"
+            placeholder="Ej: Erwin Ormeño"
+          />
+        </div>
+
+        <!-- Peso aproximado -->
+        <div class="col-md-6">
+          <label class="form-label">
+            <i class="bi bi-scale me-2 text-success"></i> Peso aproximado (kg)
+          </label>
+          <input
+            type="number"
+            step="0.01"
+            min="0"
+            class="form-control"
+            [(ngModel)]="componente.pesoKg"
+            name="pesoKg"
+            placeholder="Ej: 1.25"
+          />
+          <div class="form-text text-muted">
+            Opcional, nos ayuda a calcular el total gestionado.
+          </div>
+        </div>
+
+        <!-- Descripción -->
+        <div class="col-12">
+          <label class="form-label">
+            <i class="bi bi-info-circle-fill me-2 text-success"></i> Descripción
+          </label>
+          <textarea
+            class="form-control"
+            [(ngModel)]="componente.descripcion"
+            name="descripcion"
+            rows="3"
+            placeholder="Notas técnicas, modelo, pruebas pendientes..."
+          ></textarea>
+        </div>
+      </div>
+
+      <!-- BOTONES -->
+      <div class="d-grid mt-4 gap-2">
+        <button type="submit" class="btn btn-success">
+          <i class="bi bi-save2-fill me-2"></i>
+          {{ isEditing ? 'Actualizar componente' : 'Registrar componente' }}
+        </button>
+
+        <button type="button" class="btn btn-danger" (click)="logout()">
+          <i class="bi bi-box-arrow-right me-2"></i> Cerrar sesión
+        </button>
+      </div>
+
+      <div *ngIf="guardado" class="alert alert-success text-center mt-3">
+        <i class="bi bi-check-circle-fill me-2"></i> ¡Componente guardado correctamente!
+      </div>
+    </form>
+  </div>
+
+  <!-- DERECHA: HISTORIAL -->
+  <div class="componentes-historial">
+    <div class="historial-header">
+      <h3><i class="bi bi-list-check me-2"></i> Historial</h3>
+      <div class="historial-search">
+        <i class="bi bi-search"></i>
+        <input
+          type="text"
+          placeholder="Buscar componente..."
+          [(ngModel)]="filtro"
+          (input)="filtrarComponentes()"
+        />
+      </div>
+    </div>
+
+    <!-- ⚖️ Total de kilos (según la lista filtrada) -->
+    <div class="mb-2 fw-semibold text-success">
+      Total estimado recolectado: {{ totalKg | number:'1.2-2' }} kg
+    </div>
+
+    <div class="historial-body">
+      <table class="table table-hover align-middle mb-0">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Categoría</th>
+            <th>Estado</th>
+            <th>Ubicación</th>
+            <th>Fecha</th>
+            <th>Peso (kg)</th>
+            <th>Responsable</th>
+            <th class="text-center">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let c of listaFiltrada">
+            <td>{{ c.nombre }}</td>
+            <td class="text-capitalize">{{ c.categoria }}</td>
+            <td class="text-capitalize">{{ c.estado }}</td>
+            <td>{{ c.ubicacion }}</td>
+
+            <!-- 🔧 FECHA SEGURA -->
+            <td>
+              {{ c.fechaIngreso ? (c.fechaIngreso | date:'dd/MM/yyyy') : '—' }}
+            </td>
+
+            <!-- Peso -->
+            <td>
+              {{ c.pesoKg ? (c.pesoKg | number:'1.2-2') : '—' }}
+            </td>
+
+            <td>{{ c.responsable }}</td>
+            <td class="text-center">
+              <button class="btn btn-sm btn-warning me-2" (click)="editarComponente(c)">
+                <i class="bi bi-pencil-square"></i>
+              </button>
+              <button class="btn btn-sm btn-danger" (click)="eliminarComponente(c._id!)">
+                <i class="bi bi-trash3-fill"></i>
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="!listaFiltrada || listaFiltrada.length === 0">
+            <td colspan="8" class="text-center text-muted py-3">
+              <i class="bi bi-exclamation-circle me-1"></i> No hay componentes registrados.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

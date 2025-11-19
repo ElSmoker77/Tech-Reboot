@@ -1,0 +1,236 @@
+/* =======================
+   🟢 LAYOUT PRINCIPAL NUEVO
+   reemplaza el viejo #componentes
+======================= */
+
+#componentes {
+  display: grid;
+  grid-template-columns: 0.42fr 0.58fr;
+  height: 100vh;
+  padding: 1.8rem 2rem;
+  gap: 1.8rem;
+  box-sizing: border-box;
+  align-items: stretch;
+
+  /* fondo suave */
+  background:
+    radial-gradient(circle at 20% 20%, rgba(35,181,93,0.32), transparent 55%),
+    radial-gradient(circle at 85% 10%, rgba(11,125,62,0.28), transparent 60%),
+    linear-gradient(135deg, rgba(6,57,29,0.95), rgba(10,98,51,0.85));
+}
+
+/* =======================
+   🟢 FORM IZQUIERDO
+======================= */
+
+.componentes-form {
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.10);
+  padding: 1.6rem 2rem;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: #16a34a #f0fdf4;
+  max-height: 100%;
+}
+
+.componentes-form h2 {
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: #0a3d2f;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.componentes-form label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+  color: #14532d;
+}
+
+.componentes-form input,
+.componentes-form select,
+.componentes-form textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(22,101,52,0.25);
+  font-size: 0.95rem;
+  background: #f8faf8;
+  transition: 0.25s;
+  margin-bottom: 1rem;
+}
+
+.componentes-form input:focus,
+.componentes-form select:focus,
+.componentes-form textarea:focus {
+  outline: none;
+  border-color: #16a34a;
+  box-shadow: 0 0 0 3px rgba(22,163,74,0.2);
+  background: #fff;
+}
+
+.componentes-form textarea {
+  resize: none;
+}
+
+/* Botones */
+.componentes-form .btn {
+  border: none;
+  padding: 0.9rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.15s;
+
+  &.btn-success {
+    background: linear-gradient(135deg, #16a34a, #22c55e);
+    color: #fff;
+  }
+
+  &.btn-danger {
+    background: linear-gradient(135deg, #b91c1c, #ef4444);
+    color: #fff;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 18px rgba(0,0,0,0.15);
+  }
+}
+
+.componentes-form .alert {
+  border-radius: 12px;
+  background: #dcfce7;
+  color: #14532d;
+  padding: 0.8rem;
+  font-weight: 500;
+}
+
+/* =======================
+   🟢 HISTORIAL DERECHA
+======================= */
+
+.componentes-historial {
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.10);
+  padding: 1.5rem 1.8rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Header */
+.historial-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+
+  h3 {
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: #0a3d2f;
+    margin: 0;
+  }
+
+  .historial-search {
+    display: flex;
+    align-items: center;
+    background: #f0fdf4;
+    border-radius: 12px;
+    padding: 0.4rem 0.8rem;
+    border: 1px solid rgba(22,163,74,0.3);
+    width: 260px;
+
+    i {
+      color: #16a34a;
+      margin-right: 0.4rem;
+      font-size: 1.1rem;
+    }
+
+    input {
+      border: none;
+      outline: none;
+      flex: 1;
+      background: transparent;
+      font-size: 0.9rem;
+      color: #14532d;
+    }
+  }
+}
+
+.historial-body {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: #22c55e #f0fdf4;
+  border-radius: 12px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.table thead {
+  background-color: #22c55e;
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.table th,
+.table td {
+  padding: 0.75rem 0.9rem;
+  border-bottom: 1px solid #e5e7eb;
+  white-space: nowrap;
+}
+
+.table tr:hover {
+  background: #f0fdf4;
+}
+
+/* =======================
+   📱 RESPONSIVE
+======================= */
+@media (max-width: 992px) {
+  #componentes {
+    grid-template-columns: 1fr;
+    height: auto;
+    padding: 1rem;
+    gap: 1.5rem;
+  }
+
+  .componentes-form,
+  .componentes-historial {
+    height: auto;
+    max-height: none;
+  }
+}
+
+/* ⚠️ ERRORES */
+.field-error {
+  margin-top: -6px;
+  margin-bottom: 10px;
+  font-size: 0.83rem;
+  font-weight: 500;
+  color: #d91c1c;
+  padding-left: 4px;
+}
+
+/* Borde rojo */
+.is-invalid {
+  border-color: #d91c1c !important;
+  box-shadow: 0 0 0 2px rgba(217,28,28,0.18) !important;
+}

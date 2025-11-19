@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { InteractorType } from \"../../Enums/Types/InteractorType.js\";\nexport class ParticlesInteractorBase {\n  constructor(container) {\n    this.type = InteractorType.particles;\n    this.container = container;\n  }\n}","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

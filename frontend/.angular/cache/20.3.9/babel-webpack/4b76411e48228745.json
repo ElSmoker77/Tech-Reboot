@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var AlterType = /*#__PURE__*/function (AlterType) {\n  AlterType[\"darken\"] = \"darken\";\n  AlterType[\"enlighten\"] = \"enlighten\";\n  return AlterType;\n}(AlterType || {});","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

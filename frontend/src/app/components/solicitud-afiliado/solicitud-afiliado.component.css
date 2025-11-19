@@ -1,0 +1,36 @@
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out;
+}
+
+/* Estilos para los campos requeridos */
+input.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+  border-color: #ef4444;
+}
+
+/* Estilos para checkboxes */
+input[type="checkbox"] {
+  accent-color: #16a34a;
+}
+
+/* Mejoras de accesibilidad */
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid #16a34a;
+  outline-offset: 2px;
+}
+

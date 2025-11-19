@@ -1,0 +1,118 @@
+.equipo {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding-top: 0.5rem;     /* baja un poco todo el bloque */
+  padding-bottom: 1.5rem;  /* hace que ocupe más alto hacia abajo */
+}
+
+/* Títulos */
+.equipo h2 {
+  letter-spacing: 0.03em;
+}
+
+/* Grid de tarjetas */
+.equipo-grid {
+  row-gap: 1.25rem;
+}
+
+/* Tarjeta base */
+.equipo-card {
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(6px);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease,
+    background-color 0.25s ease;
+}
+
+/* Halo verde suave al hover */
+.equipo-card::before {
+  content: "";
+  position: absolute;
+  inset: -30%;
+  background: radial-gradient(
+    circle at top left,
+    rgba(16, 185, 129, 0.18),
+    transparent 55%
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.equipo-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(15, 118, 110, 0.18);
+  border-color: rgba(16, 185, 129, 0.4);
+  background-color: rgba(255, 255, 255, 0.98);
+}
+
+.equipo-card:hover::before {
+  opacity: 1;
+}
+
+/* 🚀 FOTO MÁS GRANDE PERO MISMO ESTILO */
+.equipo-foto {
+  width: 76px;
+  height: 76px;
+  border-radius: 999px;
+  object-fit: cover;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.6);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.equipo-card:hover .equipo-foto {
+  transform: translateY(-1px) scale(1.04);
+  box-shadow: 0 8px 18px rgba(22, 101, 52, 0.35);
+}
+
+/* Texto descripción */
+.equipo-card p {
+  margin: 0;
+}
+
+/* Mail */
+.equipo-card a {
+  text-decoration: none;
+}
+
+.equipo-card a i {
+  font-size: 0.95em;
+}
+
+/* Bloque extra bajo las tarjetas: se pega al fondo de la columna */
+.equipo-extra {
+  margin-top: auto;        /* empuja este bloque hacia abajo */
+  padding-top: 1.25rem;    /* separa un poquito de las tarjetas */
+}
+
+.equipo-extra strong {
+  font-weight: 600;
+}
+
+/* Responsive: en móvil, una card por fila */
+@media (max-width: 640px) {
+  .equipo h2 {
+    font-size: 1.5rem;
+  }
+
+  .equipo-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .equipo-card {
+    padding: 0.9rem 1rem;
+  }
+
+  .equipo-foto {
+    width: 68px;
+    height: 68px;
+  }
+}

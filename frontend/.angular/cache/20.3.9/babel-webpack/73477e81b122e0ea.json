@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var CollisionMode = /*#__PURE__*/function (CollisionMode) {\n  CollisionMode[\"absorb\"] = \"absorb\";\n  CollisionMode[\"bounce\"] = \"bounce\";\n  CollisionMode[\"destroy\"] = \"destroy\";\n  return CollisionMode;\n}(CollisionMode || {});","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

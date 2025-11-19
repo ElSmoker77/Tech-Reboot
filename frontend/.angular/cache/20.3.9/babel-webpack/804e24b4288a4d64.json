@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var DivType = /*#__PURE__*/function (DivType) {\n  DivType[\"circle\"] = \"circle\";\n  DivType[\"rectangle\"] = \"rectangle\";\n  return DivType;\n}(DivType || {});","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

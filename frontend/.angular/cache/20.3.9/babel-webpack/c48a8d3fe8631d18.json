@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var ParticleOutType = /*#__PURE__*/function (ParticleOutType) {\n  ParticleOutType[\"normal\"] = \"normal\";\n  ParticleOutType[\"inside\"] = \"inside\";\n  ParticleOutType[\"outside\"] = \"outside\";\n  return ParticleOutType;\n}(ParticleOutType || {});","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

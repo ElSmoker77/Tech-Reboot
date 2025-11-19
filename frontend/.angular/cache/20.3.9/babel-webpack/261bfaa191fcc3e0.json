@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var InteractivityDetect = /*#__PURE__*/function (InteractivityDetect) {\n  InteractivityDetect[\"canvas\"] = \"canvas\";\n  InteractivityDetect[\"parent\"] = \"parent\";\n  InteractivityDetect[\"window\"] = \"window\";\n  return InteractivityDetect;\n}(InteractivityDetect || {});","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

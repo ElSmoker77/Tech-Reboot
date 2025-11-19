@@ -1,0 +1,1 @@
+{"ast":null,"code":"export function drawLine(data) {\n  const {\n      context,\n      particle,\n      radius\n    } = data,\n    shapeData = particle.shapeData,\n    centerY = 0;\n  context.moveTo(-radius, centerY);\n  context.lineTo(radius, centerY);\n  context.lineCap = shapeData?.cap ?? \"butt\";\n}","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

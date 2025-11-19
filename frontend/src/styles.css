@@ -1,0 +1,102 @@
+@import 'ngx-toastr/toastr';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global layout */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", Arial, sans-serif;
+  overflow: auto;
+  background: transparent !important;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* App root */
+app-root {
+  display: block;
+  min-height: 100vh;
+  position: relative;
+  z-index: 2;
+}
+
+/* Pantalla de carga básica */
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-size: 1.5rem;
+  color: #2e7d32;
+  background-color: #ffffff;
+}
+
+/* Utilidad de fade-in genérica */
+.fade-in {
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ======================================================
+   ✨ TOAST NEÓN FUTURISTA — TechReboot
+   ====================================================== */
+
+/* Contenedor general */
+.toast {
+  border-radius: 18px !important;
+  padding: 0.9rem 1.2rem !important;
+  font-size: 0.95rem !important;
+
+  /* Glow futurista */
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 18px rgba(34, 197, 94, 0.8),
+              0 0 35px rgba(34, 197, 94, 0.6),
+              0 0 55px rgba(34, 197, 94, 0.4) !important;
+
+  border: 1px solid rgba(34, 197, 94, 0.8) !important;
+  color: #e5e7eb !important;
+
+  animation: neonFadeIn 0.35s ease-out;
+  backdrop-filter: blur(8px);
+}
+
+/* Éxito -> verde neón */
+.toast-success {
+  background: rgba(22, 163, 74, 0.22) !important;
+}
+
+/* Error -> rojo neón */
+.toast-error {
+  background: rgba(190, 18, 60, 0.22) !important;
+  border-color: rgba(190, 18, 60, 0.85) !important;
+
+  box-shadow: 0 0 18px rgba(190, 18, 60, 0.8),
+              0 0 35px rgba(190, 18, 60, 0.6),
+              0 0 55px rgba(190, 18, 60, 0.4) !important;
+}
+
+/* Animación de entrada suave */
+@keyframes neonFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

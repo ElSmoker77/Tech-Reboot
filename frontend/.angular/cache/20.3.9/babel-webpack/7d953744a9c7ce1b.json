@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var RotateDirection = /*#__PURE__*/function (RotateDirection) {\n  RotateDirection[\"clockwise\"] = \"clockwise\";\n  RotateDirection[\"counterClockwise\"] = \"counter-clockwise\";\n  RotateDirection[\"random\"] = \"random\";\n  return RotateDirection;\n}(RotateDirection || {});","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

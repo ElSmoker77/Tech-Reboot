@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var TiltDirection = /*#__PURE__*/function (TiltDirection) {\n  TiltDirection[\"clockwise\"] = \"clockwise\";\n  TiltDirection[\"counterClockwise\"] = \"counter-clockwise\";\n  TiltDirection[\"random\"] = \"random\";\n  return TiltDirection;\n}(TiltDirection || {});","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

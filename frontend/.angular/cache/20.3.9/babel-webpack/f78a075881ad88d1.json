@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var PixelMode = /*#__PURE__*/function (PixelMode) {\n  PixelMode[\"precise\"] = \"precise\";\n  PixelMode[\"percent\"] = \"percent\";\n  return PixelMode;\n}(PixelMode || {});","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

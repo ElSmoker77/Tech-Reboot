@@ -1,0 +1,438 @@
+/* ============================================
+   DIAGRAMA ECONOMÍA CIRCULAR (CÍRCULO IZQUIERDA)
+   Contiene: donut, orbitas, ítems y animaciones
+   ============================================ */
+
+.circular-economy {
+  position: relative;
+  width: 420px;
+  height: 420px;
+  margin: 40px auto;
+  font-family: system-ui, sans-serif;
+  color: #0b3b2e;
+
+  // Radio donde se colocan los ítems alrededor del círculo
+  $radius: 170px;
+
+  /* -----------------------------
+     ÓRBITA QUE GIRA TODO
+     (donut + iconos + textos)
+     ----------------------------- */
+  &__orbit {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    animation: orbit-rotate 30s linear infinite;
+  }
+
+  /* -----------------------------
+     DONUT DE FONDO (ANILLO)
+     ----------------------------- */
+  &__ring {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at center, #fff 0 32%, transparent 32%),
+      conic-gradient(
+        #2faf5e 0deg 50deg,
+        #6ac26d 50deg 100deg,
+        #8bd57a 100deg 150deg,
+        #a2e085 150deg 200deg,
+        #8bd57a 200deg 250deg,
+        #6ac26d 250deg 300deg,
+        #2faf5e 300deg 360deg
+      );
+    position: relative;
+    overflow: visible; // importante para que se vea el halo
+
+    /* Sombra base suave */
+    box-shadow: 0 0 24px rgba(15, 23, 42, 0.22);
+
+    /* Halo difuminado alrededor del donut */
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -18px; /* qué tan lejos “sale” el halo */
+      border-radius: 50%;
+      background:
+        radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.85) 0%,
+          rgba(255, 255, 255, 0.4) 35%,
+          rgba(34, 197, 94, 0.15) 60%,
+          transparent 100%
+        );
+      pointer-events: none;
+      z-index: -1;
+      filter: blur(6px); /* difumina el halo */
+    }
+  }
+
+  /* -----------------------------
+     CENTRO BLANCO FIJO
+     (texto "ECONOMÍA CIRCULAR")
+     ----------------------------- */
+  &__center {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    z-index: 3;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+    h2 {
+      font-size: 20px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      line-height: 1.3;
+    }
+  }
+
+  /* Centro activo con aura */
+  &__center--active {
+    box-shadow:
+      0 0 0 4px rgba(34, 197, 94, 0.25),
+      0 0 26px rgba(22, 163, 74, 0.65);
+    transform: scale(1.03);
+  }
+
+  /* -----------------------------
+     ÍTEM BASE (cada etapa)
+     Define la posición relativa
+     ----------------------------- */
+  &__item {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 140px;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 2;
+    cursor: pointer;
+  }
+
+  /* -----------------------------
+     CONTENIDO INTERNO DEL ÍTEM
+     (icono redondo + texto)
+     Se contra-gira para quedar
+     siempre derecho
+     ----------------------------- */
+  &__item-inner {
+    display: inline-block;
+    animation: counter-rotate 30s linear infinite; // misma duración que orbit-rotate
+    transform-origin: center center;
+
+    .icon {
+      position: relative; /* necesario para el aura */
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      margin: 0 auto 8px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    span {
+      font-size: 11px;
+      text-transform: uppercase;
+      font-weight: 600;
+      line-height: 1.3;
+      display: inline-block;
+      transition: color 0.25s ease;
+    }
+
+    // Hover: zoom del icono (sin girar)
+    &:hover .icon {
+      transform: scale(1.12);
+      box-shadow: 0 0 18px rgba(0, 0, 0, 0.25);
+    }
+  }
+
+  /* -----------------------------
+     POSICIONES DE CADA ÍTEM
+     (ángulos alrededor del círculo)
+     ----------------------------- */
+
+  &__item--1 {
+    transform: translate(-50%, -50%) rotate(-90deg)
+      translate(0, -$radius) rotate(90deg);
+  }
+
+  &__item--2 {
+    transform: translate(-50%, -50%) rotate(-38deg)
+      translate(0, -$radius) rotate(38deg);
+  }
+
+  &__item--3 {
+    transform: translate(-50%, -50%) rotate(14deg)
+      translate(0, -$radius) rotate(-14deg);
+  }
+
+  &__item--4 {
+    transform: translate(-50%, -50%) rotate(66deg)
+      translate(0, -$radius) rotate(-66deg);
+  }
+
+  &__item--5 {
+    transform: translate(-50%, -50%) rotate(118deg)
+      translate(0, -$radius) rotate(-118deg);
+  }
+
+  &__item--6 {
+    transform: translate(-50%, -50%) rotate(170deg)
+      translate(0, -$radius) rotate(-170deg);
+  }
+
+  &__item--7 {
+    transform: translate(-50%, -50%) rotate(222deg)
+      translate(0, -$radius) rotate(-222deg);
+  }
+
+  /* -----------------------------
+     ESTADO ACTIVO DEL ÍTEM
+     - Icono más grande
+     - Aura verde
+     - Texto más oscuro
+     ----------------------------- */
+  &__item--active {
+    .icon {
+      transform: scale(1.4);
+      box-shadow:
+        0 0 0 4px rgba(154, 244, 187, 0.4), /* anillo suave alrededor */
+        0 0 24px rgba(144, 140, 238, 0.7);   /* brillo verde */
+    }
+
+    span {
+      color: #065f46;
+    }
+  }
+
+  /* -----------------------------
+     Flecha inferior (si la usas)
+     ----------------------------- */
+  &__loop-arrow {
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 32px;
+    z-index: 4;
+    animation: loop-spin 2.5s linear infinite;
+  }
+}
+
+/* ============================================
+   ANIMACIONES DEL DIAGRAMA
+   - orbit-rotate: gira todo el anillo
+   - counter-rotate: endereza los ítems
+   - loop-spin: flecha girando
+   ============================================ */
+
+@keyframes orbit-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes counter-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg); // contrario a orbit-rotate
+  }
+}
+
+@keyframes loop-spin {
+  from {
+    transform: translateX(-50%) rotate(0deg);
+  }
+  to {
+    transform: translateX(-50%) rotate(360deg);
+  }
+}
+
+/* ============================================
+   PANEL DERECHO DE INFORMACIÓN (info-card)
+   Tarjeta pedagógica con título, secciones, etc.
+   ============================================ */
+
+.info-card {
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 22px;
+  padding: 24px 28px;
+  border: 1px solid rgba(15, 118, 110, 0.12);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+  animation: fade-in 0.25s ease-out;
+  position: relative;
+  overflow: hidden;
+
+  /* Línea de acento a la izquierda */
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 16px;
+    bottom: 16px;
+    width: 4px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, #22c55e, #059669);
+    opacity: 0.9;
+  }
+
+  /* Contenido interno de la tarjeta */
+  &__inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Eyebrow / etiqueta superior */
+  &__eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #059669;
+    margin-bottom: 0.25rem;
+  }
+
+  /* Título principal de la etapa */
+  &__title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 0.6rem;
+    color: #0f172a;
+  }
+
+  /* Pastilla-resumen bajo el título */
+  &__pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(16, 185, 129, 0.08);
+    color: #047857;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 0.9rem;
+  }
+
+  /* Secciones internas (bloques del card) */
+  &__section {
+    margin-bottom: 0.9rem;
+  }
+
+  &__section-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin: 0 0 0.25rem;
+    color: #1f2937;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  &__section-icon {
+    font-size: 1rem;
+  }
+
+  /* Texto general del panel */
+  &__body {
+    font-size: 0.9rem;
+    color: #4b5563;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Lista con viñetas decoradas (si la usas) */
+  &__list {
+    font-size: 0.9rem;
+    color: #4b5563;
+    margin: 0;
+    padding-left: 1.1rem;
+    list-style: none;
+
+    li {
+      position: relative;
+      margin-bottom: 0.25rem;
+      padding-left: 0.3rem;
+    }
+
+    li::before {
+      content: '•';
+      position: absolute;
+      left: -0.9rem;
+      color: #22c55e;
+      font-weight: 700;
+    }
+  }
+
+  /* Bloque de ejemplo destacado */
+  &__example {
+    background: rgba(16, 185, 129, 0.06);
+    border-radius: 14px;
+    padding: 10px 12px;
+    border: 1px dashed rgba(16, 185, 129, 0.4);
+  }
+
+  &__body--example {
+    font-size: 0.87rem;
+  }
+
+  /* Para respetar saltos de línea de detalle / ejemplo */
+  &__body--multiline,
+  &__body--example {
+    white-space: pre-line;
+  }
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+  .circular-economy {
+    width: 320px;
+    height: 320px;
+    margin: 24px auto;
+  }
+
+  .info-card {
+    padding: 18px 18px 20px;
+    border-radius: 18px;
+
+    &__title {
+      font-size: 1.3rem;
+    }
+
+    &__body,
+    &__list {
+      font-size: 0.85rem;
+    }
+  }
+}

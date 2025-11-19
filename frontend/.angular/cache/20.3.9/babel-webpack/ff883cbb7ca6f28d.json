@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var RangeType = /*#__PURE__*/function (RangeType) {\n  RangeType[\"circle\"] = \"circle\";\n  RangeType[\"rectangle\"] = \"rectangle\";\n  return RangeType;\n}(RangeType || {});","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

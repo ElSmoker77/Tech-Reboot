@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var AnimationStatus = /*#__PURE__*/function (AnimationStatus) {\n  AnimationStatus[\"increasing\"] = \"increasing\";\n  AnimationStatus[\"decreasing\"] = \"decreasing\";\n  return AnimationStatus;\n}(AnimationStatus || {});","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { drawSquare } from \"./Utils.js\";\nconst sides = 4;\nexport class SquareDrawer {\n  constructor() {\n    this.validTypes = [\"edge\", \"square\"];\n  }\n  draw(data) {\n    drawSquare(data);\n  }\n  getSidesCount() {\n    return sides;\n  }\n}","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

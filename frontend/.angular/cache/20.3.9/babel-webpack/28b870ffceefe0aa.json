@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var EmitterClickMode = /*#__PURE__*/function (EmitterClickMode) {\n  EmitterClickMode[\"emitter\"] = \"emitter\";\n  return EmitterClickMode;\n}(EmitterClickMode || {});","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

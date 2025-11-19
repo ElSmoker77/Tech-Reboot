@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var InteractorType = /*#__PURE__*/function (InteractorType) {\n  InteractorType[\"external\"] = \"external\";\n  InteractorType[\"particles\"] = \"particles\";\n  return InteractorType;\n}(InteractorType || {});","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

@@ -1,0 +1,79 @@
+.menu-card {
+  max-width: 420px;
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.menu-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
+}
+
+h2 {
+  font-weight: 600;
+  color: #0b7d3e;
+  letter-spacing: 0.5px;
+}
+
+.menu-btn {
+  padding: 14px 0;
+  font-size: 1.05rem;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  box-shadow: 0 4px 8px rgba(11, 125, 62, 0.08);
+}
+
+.menu-btn:hover {
+  transform: scale(1.03);
+}
+
+.btn-success {
+  background-color: #0b7d3e;
+  border: none;
+}
+
+.btn-success:hover {
+  background-color: #09a955;
+}
+
+.btn-outline-success {
+  color: #0b7d3e;
+  border-color: #0b7d3e;
+}
+
+.btn-outline-success:hover {
+  background-color: #09a955;
+  color: white;
+  border-color: #09a955;
+}
+
+.btn-danger {
+  background-color: #d9534f;
+  border: none;
+}
+
+.btn-danger:hover {
+  background-color: #c9302c;
+}
+
+.animate__fadeIn {
+  animation-duration: 0.9s;
+}
+
+@media (max-width: 576px) {
+  .menu-card {
+    padding: 25px 15px;
+  }
+
+  .menu-btn {
+    font-size: 1rem;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+}

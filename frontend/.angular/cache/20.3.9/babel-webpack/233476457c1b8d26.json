@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var LimitMode = /*#__PURE__*/function (LimitMode) {\n  LimitMode[\"delete\"] = \"delete\";\n  LimitMode[\"wait\"] = \"wait\";\n  return LimitMode;\n}(LimitMode || {});","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

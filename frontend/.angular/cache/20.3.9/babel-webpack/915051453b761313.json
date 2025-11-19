@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var ResponsiveMode = /*#__PURE__*/function (ResponsiveMode) {\n  ResponsiveMode[\"screen\"] = \"screen\";\n  ResponsiveMode[\"canvas\"] = \"canvas\";\n  return ResponsiveMode;\n}(ResponsiveMode || {});","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

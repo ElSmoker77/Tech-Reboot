@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { EmittersCircleShape } from \"./EmittersCircleShape.js\";\nexport class EmittersCircleShapeGenerator {\n  generate(position, size, fill, options) {\n    return new EmittersCircleShape(position, size, fill, options);\n  }\n}","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

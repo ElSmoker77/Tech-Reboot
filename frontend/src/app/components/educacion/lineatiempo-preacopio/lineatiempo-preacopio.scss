@@ -1,0 +1,491 @@
+.preacopio {
+  width: 100%;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #0f172a;
+  margin-bottom: 3rem;
+  margin-top: -0.15rem;
+
+}
+
+/* ============================
+   CONTENEDOR GENERAL
+   ============================ */
+
+.preacopio__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0rem 1.25rem 2.5rem; // 👈 menos padding superior
+}
+
+/* Ya no usamos título/subtítulo fuera de la tarjeta, así que puedes dejar
+   estas clases por si se reutilizan en otro lado, o quitarlas si no las usas. */
+.preacopio__title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #111827;
+  margin: 0 0 0.25rem;
+}
+
+.preacopio__subtitle {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #4b5563;
+}
+
+/* ============================
+   MINI MENÚ DE BLOQUES
+   ============================ */
+
+/* Ahora van dentro de la tarjeta, así que ajustamos márgenes */
+
+.preacopio-card__header {
+  padding: 16px 22px 4px 18px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+  background: rgba(255, 255, 255, 0.96);
+}
+
+.preacopio-blocks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin: 0 0 0.6rem; // 👈 sin margen top/bottom extra
+}
+
+/* Bloque con estilo de “pastilla con flecha” */
+
+.preacopio-block {
+  position: relative;
+  display: inline-flex;
+  align-items: stretch;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
+  flex: 0 0 auto;
+}
+
+.preacopio-block__arrow {
+  position: relative;
+  background: #e5e7eb;
+  padding: 0.45rem 0.7rem 0.45rem 0.75rem;
+  border-radius: 999px 0 0 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &::after {
+    content: '';
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-style: solid;
+    border-width: 12px 0 12px 10px;
+    border-color: transparent transparent transparent #e5e7eb;
+  }
+}
+
+.preacopio-block__number {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.preacopio-block__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.32rem 0.9rem 0.32rem 1.2rem;
+  border-radius: 0 999px 999px 0;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12);
+  min-width: 170px;
+}
+
+.preacopio-block__label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.preacopio-block__subtitle {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #6b7280;
+  margin-top: 0.05rem;
+}
+
+/* Estado activo */
+
+.preacopio-block--active {
+  .preacopio-block__arrow {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+
+    &::after {
+      border-color: transparent transparent transparent #22c55e;
+    }
+  }
+
+  .preacopio-block__number {
+    color: #f9fafb;
+  }
+
+  .preacopio-block__content {
+    background: #ecfdf5;
+    box-shadow: 0 6px 16px rgba(22, 101, 52, 0.35);
+  }
+}
+
+/* Responsive bloques */
+
+@media (max-width: 768px) {
+  .preacopio-block__content {
+    min-width: 150px;
+    padding-inline: 0.7rem;
+  }
+
+  .preacopio-block__label {
+    font-size: 0.76rem;
+  }
+
+  .preacopio-block__subtitle {
+    font-size: 0.65rem;
+  }
+}
+
+/* ============================
+   MINI MENÚ DE PASOS DEL BLOQUE
+   ============================ */
+
+.preacopio-steps-mini {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0 0 0.6rem; // 👈 pegado al bloque
+}
+
+.preacopio-step-mini {
+  border-radius: 999px;
+  border: 1px solid rgba(209, 213, 219, 0.9);
+  background: rgba(255, 255, 255, 0.9);
+  padding: 0.28rem 0.75rem;
+  font-size: 0.78rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  cursor: pointer;
+}
+
+.preacopio-step-mini__number {
+  font-weight: 700;
+  font-size: 0.78rem;
+  color: #111827;
+}
+
+.preacopio-step-mini__text {
+  white-space: nowrap;
+}
+
+.preacopio-step-mini--active {
+  border-color: #22c55e;
+  background: rgba(34, 197, 94, 0.08);
+}
+
+/* ============================
+   CONTENIDO DEL PASO
+   ============================ */
+
+.preacopio__content {
+  margin-top: 0.25rem; // 👈 casi pegado al borde verde
+}
+
+.preacopio-card {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 24px;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  min-height: 320px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 16px;
+    bottom: 16px;
+    width: 4px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, #22c55e, #059669);
+  }
+}
+
+.preacopio-card__inner {
+  position: relative;
+  z-index: 1;
+  padding: 16px 22px 12px 18px;
+  flex: 1 1 auto;
+}
+
+/* (Opcionales, si ya no usas eyebrow + título los puedes eliminar) */
+.preacopio-card__eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #059669;
+  margin-bottom: 0.2rem;
+}
+
+.preacopio-card__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 0.7rem;
+  color: #0f172a;
+}
+
+.preacopio-card__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(16, 185, 129, 0.08);
+  color: #047857;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 0.9rem;
+}
+
+.preacopio-card__pill-icon {
+  font-size: 0.95rem;
+}
+
+/* === LAYOUT TEXTO + IMAGEN === */
+
+.preacopio-card__layout {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  margin-top: 0.75rem;
+}
+
+/* Columna de la imagen */
+.preacopio-card__media {
+  flex: 0 0 230px;
+  max-width: 230px;
+}
+
+/* Imagen vertical */
+.preacopio-card__image {
+  width: 100%;
+  display: block;
+  border-radius: 18px;
+  object-fit: cover;
+  aspect-ratio: 3 / 4; // cambia a 9 / 16 si tus imágenes son más altas
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.2);
+}
+
+/* Columna de texto */
+.preacopio-card__text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.preacopio-card__body {
+  font-size: 0.9rem;
+  color: #4b5563;
+  line-height: 1.6;
+  margin: 0 0 0.7rem;
+}
+
+.preacopio-card__list {
+  font-size: 0.9rem;
+  color: #4b5563;
+  margin: 0;
+  padding-left: 1.25rem;
+  list-style: none;
+
+  li {
+    position: relative;
+    margin-bottom: 0.35rem;
+  }
+
+  li::before {
+    content: '•';
+    position: absolute;
+    left: -0.9rem;
+    color: #22c55e;
+    font-weight: 700;
+  }
+}
+
+.preacopio-card__extra {
+  margin-top: 0.75rem;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(59, 130, 246, 0.05);
+  border: 1px dashed rgba(59, 130, 246, 0.5);
+  display: flex;
+  gap: 0.45rem;
+  align-items: flex-start;
+}
+
+.preacopio-card__extra-icon {
+  font-size: 1rem;
+}
+
+.preacopio-card__extra-text {
+  margin: 0;
+  font-size: 0.88rem;
+  color: #1f2937;
+}
+
+/* ============================
+   Footer navegación + progreso
+   ============================ */
+
+.preacopio-card__footer {
+  border-top: 1px solid rgba(148, 163, 184, 0.35);
+  padding: 12px 18px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: rgba(249, 250, 251, 0.95);
+}
+
+.preacopio-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.preacopio-progress__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.78rem;
+}
+
+.preacopio-progress__step {
+  font-weight: 600;
+  color: #111827;
+}
+
+.preacopio-progress__block {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.68rem;
+  color: #6b7280;
+}
+
+.preacopio-progress__bar {
+  position: relative;
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  overflow: hidden;
+}
+
+.preacopio-progress__bar-inner {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+  transition: width 0.25s ease-out;
+}
+
+/* Botones navegación */
+
+.preacopio-card__footer-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.preacopio-btn {
+  border-radius: 999px;
+  padding: 0.5rem 1rem;
+  font-size: 0.84rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  white-space: nowrap;
+}
+
+.preacopio-btn--primary {
+  background: #111827;
+  color: #f9fafb;
+}
+
+.preacopio-btn--ghost {
+  background: rgba(229, 231, 235, 0.9);
+  color: #111827;
+}
+
+.preacopio-btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+/* ============================
+   Responsive
+   ============================ */
+
+@media (max-width: 768px) {
+  .preacopio__inner {
+    padding-inline: 1rem;
+  }
+
+  .preacopio-card {
+    min-height: 280px;
+  }
+
+  .preacopio-card__footer {
+    padding-inline: 14px;
+  }
+
+  .preacopio-card__footer-buttons {
+    flex-direction: row;
+  }
+
+  .preacopio-btn {
+    flex: 1;
+    justify-content: center;
+  }
+
+  /* 📱 Layout en móvil:
+     - Texto ARRIBA
+     - Imagen ABAJO
+  */
+  .preacopio-card__layout {
+    flex-direction: column;
+  }
+
+  .preacopio-card__text {
+    order: 1;
+  }
+
+  .preacopio-card__media {
+    order: 2;
+    max-width: 100%;
+    flex: 0 0 auto;
+  }
+
+  .preacopio-card__image {
+    aspect-ratio: 4 / 3;
+  }
+}
+

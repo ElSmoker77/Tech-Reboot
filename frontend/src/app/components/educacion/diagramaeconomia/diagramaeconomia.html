@@ -1,0 +1,150 @@
+<div class="grid gap-10 lg:grid-cols-[auto,minmax(0,1fr)] items-start">
+  <!-- IZQUIERDA: círculo animado -->
+  <div class="flex justify-center">
+    <div class="circular-economy">
+      <div class="circular-economy__orbit">
+        <div class="circular-economy__ring"></div>
+
+        <!-- 1. Materias primas -->
+        <div
+          class="circular-economy__item circular-economy__item--1"
+          [class.circular-economy__item--active]="selectedStepId === 'materias'"
+          (click)="selectStep('materias')"
+        >
+          <div class="circular-economy__item-inner">
+            <div class="icon">🌳</div>
+            <span>Materias primas</span>
+          </div>
+        </div>
+
+        <!-- 2. Diseño -->
+        <div
+          class="circular-economy__item circular-economy__item--2"
+          [class.circular-economy__item--active]="selectedStepId === 'diseno'"
+          (click)="selectStep('diseno')"
+        >
+          <div class="circular-economy__item-inner">
+            <div class="icon">✏️</div>
+            <span>Diseño</span>
+          </div>
+        </div>
+
+        <!-- 3. Producción y reelaboración -->
+        <div
+          class="circular-economy__item circular-economy__item--3"
+          [class.circular-economy__item--active]="selectedStepId === 'produccion'"
+          (click)="selectStep('produccion')"
+        >
+          <div class="circular-economy__item-inner">
+            <div class="icon">📦</div>
+            <span>Producción y<br />reelaboración</span>
+          </div>
+        </div>
+
+        <!-- 4. Distribución -->
+        <div
+          class="circular-economy__item circular-economy__item--4"
+          [class.circular-economy__item--active]="selectedStepId === 'distribucion'"
+          (click)="selectStep('distribucion')"
+        >
+          <div class="circular-economy__item-inner">
+            <div class="icon">🚚</div>
+            <span>Distribución</span>
+          </div>
+        </div>
+
+        <!-- 5. Consumo -->
+        <div
+          class="circular-economy__item circular-economy__item--5"
+          [class.circular-economy__item--active]="selectedStepId === 'consumo'"
+          (click)="selectStep('consumo')"
+        >
+          <div class="circular-economy__item-inner">
+            <div class="icon">♻️</div>
+            <span>Consumo, utilización,<br />reutilización, reparación</span>
+          </div>
+        </div>
+
+        <!-- 6. Recogida -->
+        <div
+          class="circular-economy__item circular-economy__item--6"
+          [class.circular-economy__item--active]="selectedStepId === 'recogida'"
+          (click)="selectStep('recogida')"
+        >
+          <div class="circular-economy__item-inner">
+            <div class="icon">🗑️</div>
+            <span>Recogida</span>
+          </div>
+        </div>
+
+        <!-- 7. Reciclado -->
+        <div
+          class="circular-economy__item circular-economy__item--7"
+          [class.circular-economy__item--active]="selectedStepId === 'reciclado'"
+          (click)="selectStep('reciclado')"
+        >
+          <div class="circular-economy__item-inner">
+            <div class="icon">🔄</div>
+            <span>Reciclado</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Centro: ECONOMÍA CIRCULAR -->
+      <div
+        class="circular-economy__center"
+        [class.circular-economy__center--active]="selectedStepId === 'centro'"
+        (click)="selectStep('centro')"
+      >
+        <h2>ECONOMÍA<br />CIRCULAR</h2>
+      </div>
+    </div>
+  </div>
+
+  <!-- DERECHA: panel tipo tarjeta -->
+  <div *ngIf="selectedStep as step" class="circular-layout__right">
+    <div class="info-card">
+      <div class="info-card__inner">
+        <p class="info-card__eyebrow">Etapa de la economía circular</p>
+        <h3 class="info-card__title">{{ step.titulo }}</h3>
+
+        <div class="info-card__pill">
+          🔁 Parte del ciclo de producción y consumo
+        </div>
+
+        <div class="info-card__section">
+          <h4 class="info-card__section-title">
+            <span class="info-card__section-icon">📌</span>
+            ¿Qué es esta etapa?
+          </h4>
+          <p class="info-card__body">{{ step.queEs }}</p>
+        </div>
+
+        <div class="info-card__section">
+          <h4 class="info-card__section-title">
+            <span class="info-card__section-icon">🌍</span>
+            ¿Qué implica en la economía circular?
+          </h4>
+          <p
+            class="info-card__body info-card__body--multiline"
+            [innerText]="step.detalle"
+          ></p>
+        </div>
+
+        <div
+          class="info-card__section info-card__example"
+          *ngIf="step.ejemplo"
+        >
+          <h4 class="info-card__section-title">
+            <span class="info-card__section-icon">💡</span>
+            Ejemplo en Chile
+          </h4>
+          <p
+            class="info-card__body info-card__body--example"
+            [innerText]="step.ejemplo"
+          ></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

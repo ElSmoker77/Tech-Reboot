@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var GradientType = /*#__PURE__*/function (GradientType) {\n  GradientType[\"linear\"] = \"linear\";\n  GradientType[\"radial\"] = \"radial\";\n  GradientType[\"random\"] = \"random\";\n  return GradientType;\n}(GradientType || {});","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

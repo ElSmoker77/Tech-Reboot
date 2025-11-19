@@ -1,0 +1,128 @@
+<div class="preacopio__content" *ngIf="pasoSeleccionado as p">
+  <article class="preacopio-card">
+
+    <!-- 🔸 CABECERA DE LA TARJETA: BLOQUES + PASOS -->
+    <div class="preacopio-card__header">
+      <!-- MINI MENÚ DE BLOQUES -->
+      <nav class="preacopio-blocks" aria-label="Bloques de la guía">
+        <button
+          *ngFor="let bloque of bloques; let i = index"
+          type="button"
+          class="preacopio-block"
+          [class.preacopio-block--active]="bloqueSeleccionado === bloque"
+          (click)="seleccionarBloque(bloque)"
+        >
+          <div class="preacopio-block__arrow">
+            <span class="preacopio-block__number">{{ i + 1 }}</span>
+          </div>
+          <div class="preacopio-block__content">
+            <span class="preacopio-block__label">{{ bloque }}</span>
+            <span class="preacopio-block__subtitle">
+              {{ i === 0 ? 'Preparación en casa'
+                : i === 1 ? 'En el punto de acopio'
+                : 'Qué hacemos después' }}
+            </span>
+          </div>
+        </button>
+      </nav>
+
+      <!-- MINI MENÚ DE PASOS -->
+      <nav
+        class="preacopio-steps-mini"
+        aria-label="Pasos del bloque seleccionado"
+        *ngIf="pasosDelBloque.length"
+      >
+        <button
+          *ngFor="let paso of pasosDelBloque; let i = index"
+          type="button"
+          class="preacopio-step-mini"
+          [class.preacopio-step-mini--active]="pasoSeleccionado.id === paso.id"
+          (click)="seleccionarPaso(paso)"
+        >
+          <span class="preacopio-step-mini__number">{{ i + 1 }}</span>
+          <span class="preacopio-step-mini__text">{{ paso.tituloCorto }}</span>
+        </button>
+      </nav>
+    </div>
+
+    <!-- 🔸 CUERPO PRINCIPAL: SIN TÍTULO, DIRECTO A IMAGEN + TEXTO -->
+    <div class="preacopio-card__inner">
+      <div class="preacopio-card__layout">
+        <!-- Imagen del paso -->
+        <figure class="preacopio-card__media" *ngIf="p.imagen">
+          <img
+            [src]="p.imagen"
+            [alt]="p.titulo"
+            class="preacopio-card__image"
+            loading="lazy"
+          />
+        </figure>
+
+        <!-- Texto del paso -->
+        <div class="preacopio-card__text">
+          <!-- Pastilla con icono + resumen (opcional pero bonita) -->
+          <div class="preacopio-card__pill">
+            <span class="preacopio-card__pill-icon">{{ p.icono }}</span>
+            <span>{{ p.resumenCorto }}</span>
+          </div>
+
+          <p class="preacopio-card__body">
+            {{ p.descripcion }}
+          </p>
+
+          <ul class="preacopio-card__list" *ngIf="p.puntos?.length">
+            <li *ngFor="let punto of p.puntos">
+              {{ punto }}
+            </li>
+          </ul>
+
+          <div *ngIf="p.mensajeExtra" class="preacopio-card__extra">
+            <span class="preacopio-card__extra-icon">💬</span>
+            <p class="preacopio-card__extra-text">
+              {{ p.mensajeExtra }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🔸 FOOTER FIJO CON PROGRESO + BOTONES -->
+    <footer class="preacopio-card__footer">
+      <div class="preacopio-progress">
+        <div class="preacopio-progress__top">
+          <span class="preacopio-progress__step">
+            Paso {{ indiceActual + 1 }} de {{ totalPasos }}
+          </span>
+          <span class="preacopio-progress__block">
+            {{ p.bloque }}
+          </span>
+        </div>
+        <div class="preacopio-progress__bar">
+          <div
+            class="preacopio-progress__bar-inner"
+            [style.width.%]="((indiceActual + 1) * 100) / totalPasos"
+          ></div>
+        </div>
+      </div>
+
+      <div class="preacopio-card__footer-buttons">
+        <button
+          type="button"
+          class="preacopio-btn preacopio-btn--ghost"
+          (click)="irAnterior()"
+          [disabled]="indiceActual === 0"
+        >
+          ⬅ Anterior
+        </button>
+
+        <button
+          type="button"
+          class="preacopio-btn preacopio-btn--primary"
+          (click)="irSiguiente()"
+        >
+          {{ indiceActual === totalPasos - 1 ? 'Finalizar' : 'Siguiente paso ➜' }}
+        </button>
+      </div>
+    </footer>
+  </article>
+</div>

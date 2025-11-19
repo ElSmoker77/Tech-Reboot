@@ -1,0 +1,294 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  position: relative;
+}
+
+.register-background {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.gradient-layer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #e4fff2 0%, #b7f1ce 45%, #78cfa0 100%);
+  opacity: 0.85;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.8), transparent 70%);
+  opacity: 0.35;
+  filter: blur(2px);
+}
+
+.orb-1 {
+  width: 350px;
+  height: 350px;
+  top: -40px;
+  right: 15%;
+}
+
+.orb-2 {
+  width: 240px;
+  height: 240px;
+  bottom: -60px;
+  left: 10%;
+}
+
+.register-shell {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2.5rem;
+  align-items: center;
+  padding: clamp(2.5rem, 6vw, 5rem) clamp(1.5rem, 4vw, 4rem);
+}
+
+.registro-card,
+.register-panel {
+  background: rgba(255, 255, 255, 0.94);
+  border-radius: 24px;
+  padding: clamp(2rem, 4vw, 3rem);
+  box-shadow: 0 20px 60px rgba(9, 83, 42, 0.15);
+  backdrop-filter: blur(16px);
+}
+
+.registro-card {
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.brand-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(9, 169, 85, 0.12);
+  color: #0b7d3e;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+
+h2 {
+  margin: 1rem 0 0.5rem;
+  color: #0b4f2d;
+  font-size: clamp(1.8rem, 3.5vw, 2.2rem);
+}
+
+.subtitle {
+  margin-bottom: 1.5rem;
+  color: #4f5e56;
+}
+
+.field-label {
+  display: block;
+  margin-top: 1rem;
+  margin-bottom: 0.35rem;
+  font-weight: 600;
+  color: #0b4f2d;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.input-wrapper i {
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  transform: translateY(-50%);
+  color: #0b7d3e;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 0.95rem 1rem 0.95rem 2.8rem;
+  border-radius: 14px;
+  border: 1px solid rgba(11, 125, 62, 0.2);
+  background: rgba(255, 255, 255, 0.97);
+  font-size: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-wrapper input:focus {
+  outline: none;
+  border-color: #0b7d3e;
+  box-shadow: 0 0 0 3px rgba(11, 125, 62, 0.15);
+}
+
+.input-wrapper.has-error input {
+  border-color: #c9302c;
+}
+
+.helper-text {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.85rem;
+  color: #c9302c;
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1.5rem;
+}
+
+.btn-primary,
+.btn-ghost {
+  flex: 1;
+  min-width: 180px;
+  border-radius: 14px;
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #0b7d3e, #09a955);
+  color: #fff;
+  box-shadow: 0 10px 25px rgba(11, 125, 62, 0.3);
+}
+
+.btn-primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.btn-primary:not(:disabled):hover,
+.btn-ghost:hover {
+  transform: translateY(-1px);
+}
+
+.btn-ghost {
+  background: rgba(11, 125, 62, 0.08);
+  color: #0b7d3e;
+}
+
+.btn-spinner {
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #fff;
+  animation: spinner 0.8s linear infinite;
+}
+
+.status-banner {
+  margin-top: 1.5rem;
+  padding: 1rem 1.1rem;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-weight: 500;
+}
+
+.status-banner.success {
+  background: rgba(13, 136, 72, 0.12);
+  color: #0b7d3e;
+}
+
+.status-banner.error {
+  background: rgba(217, 53, 79, 0.12);
+  color: #b3261e;
+}
+
+.register-panel {
+  color: #0f2c1f;
+}
+
+.register-panel h3 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  margin-bottom: 0.7rem;
+}
+
+.register-panel p {
+  margin-bottom: 1.5rem;
+  color: #3a4c44;
+}
+
+.steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.steps li {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: inset 0 0 0 1px rgba(11, 125, 62, 0.08);
+}
+
+.step-number {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: rgba(11, 125, 62, 0.12);
+  color: #0b7d3e;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+
+.steps h4 {
+  margin: 0;
+  color: #0b4f2d;
+}
+
+.steps p {
+  margin: 0.2rem 0 0;
+  color: #4f5e56;
+  font-size: 0.92rem;
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .register-shell {
+    grid-template-columns: 1fr;
+    padding: 2.5rem 1.25rem 3.5rem;
+  }
+
+  .acciones {
+    flex-direction: column;
+  }
+
+  .btn-primary,
+  .btn-ghost {
+    width: 100%;
+  }
+
+  .register-panel {
+    order: -1;
+  }
+}

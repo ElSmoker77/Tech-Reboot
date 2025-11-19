@@ -1,0 +1,315 @@
+/* === HOST DEL COMPONENTE (para que se estire igual que el de equipo) === */
+:host {
+  display: block;
+  height: 100%;
+}
+
+/* === WRAPPER PRINCIPAL DEL CONTACTO === */
+.contacto-wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 1.5rem 0;
+}
+
+/* === TÍTULOS === */
+h1 {
+  color: #0b7d3e;
+  text-align: center;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-weight: 1250;
+  font-size: 2rem;
+  margin-top: 0;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+h2 {
+  color: #0b7d3e;
+  text-align: center;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+/* === TARJETA FORMULARIO (ESTILO EQUIPO) === */
+.card {
+  position: relative;
+  background-color: #ffffff;
+  border-radius: 24px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+  overflow: hidden;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease,
+    background-color 0.25s ease;
+}
+
+/* Halo verde suave en hover */
+.card::before {
+  content: '';
+  position: absolute;
+  inset: -30%;
+  background: radial-gradient(
+    circle at top left,
+    rgba(11, 125, 62, 0.18),
+    transparent 55%
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(11, 125, 62, 0.18);
+  border-color: rgba(11, 125, 62, 0.4);
+  background-color: rgba(255, 255, 255, 0.98);
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+/* === CAMPOS DE FORMULARIO === */
+.form-control {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid #c8e6c9;
+  padding: 0.7rem 0.9rem;
+  font-size: 0.95rem;
+  transition: all 0.25s ease;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.form-control-lg {
+  padding: 0.75rem 0.85rem;
+  font-size: 1rem;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #0b7d3e;
+  box-shadow: 0 0 0 0.15rem rgba(11, 125, 62, 0.25);
+}
+
+/* === LABELS === */
+.form-label {
+  color: #0b7d3e;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+/* === BOTONES === */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 0.65rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.25s ease;
+  text-decoration: none;
+}
+
+.btn-lg {
+  padding-top: 0.8rem;
+  padding-bottom: 0.8rem;
+}
+
+.btn-success {
+  background-color: #0b7d3e;
+  color: #ffffff;
+  border-color: #0b7d3e;
+}
+
+.btn-success:hover {
+  background-color: #09a955;
+  border-color: #09a955;
+  transform: translateY(-2px);
+}
+
+.btn-outline-success {
+  background-color: transparent;
+  color: #0b7d3e;
+  border-color: #0b7d3e;
+}
+
+.btn-outline-success:hover {
+  background-color: #09a955;
+  color: #ffffff;
+}
+
+/* === LINK "¿QUIERES SER PUNTO DE ACOPIO?" === */
+
+/* El texto que va al lado del botón */
+.contacto-wrapper .d-flex p {
+  font-size: 0.85rem;
+  color: #6b7280;
+  line-height: 1.4;
+}
+
+/* Estilo del link en sí (usa la clase link-success del HTML) */
+.contacto-wrapper a.link-success {
+  color: #0b7d3e;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 1px;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.15s ease;
+}
+
+.contacto-wrapper a.link-success:hover {
+  color: #09a955;
+  border-color: rgba(9, 169, 85, 0.8);
+  transform: translateY(-1px);
+}
+
+/* Un pelín más marcado en móvil (para que parezca botón/link importante) */
+@media (max-width: 768px) {
+  .contacto-wrapper .d-flex p {
+    margin-top: 0.35rem;
+    text-align: left;
+  }
+
+  .contacto-wrapper a.link-success {
+    display: inline-block;
+    margin-top: 0.1rem;
+  }
+}
+
+/* === ALERTA DE ÉXITO === */
+.alert-success {
+  border-radius: 10px;
+  background-color: #e8f9ee;
+  border: 1px solid #0b7d3e;
+  color: #0b7d3e;
+  font-weight: 500;
+  padding: 0.75rem 1rem;
+  text-align: center;
+  animation: fadeInForm 0.8s ease-in-out;
+}
+
+/* === VALIDACIÓN === */
+.is-invalid {
+  border-color: #e74c3c !important;
+}
+
+.invalid-feedback {
+  font-size: 0.9rem;
+  color: #e74c3c;
+}
+
+/* === ICONOS === */
+.me-2 {
+  margin-right: 0.5rem;
+}
+
+/* === ANIMACIÓN DE ENTRADA === */
+.animate__animated.animate__fadeIn {
+  animation: fadeInForm 0.8s ease-in-out;
+}
+
+@keyframes fadeInForm {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === CONTENEDOR PRINCIPAL (si en algún momento usas .container aquí) === */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1.5rem 1.5rem;
+}
+
+/* === RESPONSIVE GENERAL === */
+@media (max-width: 640px) {
+  h1 {
+    font-size: 1.7rem;
+  }
+
+  h2 {
+    font-size: 1rem;
+  }
+
+  .card {
+    border-radius: 18px;
+    padding: 1.5rem;
+  }
+
+  .form-control {
+    font-size: 0.9rem;
+  }
+
+  .btn-lg {
+    padding: 0.7rem 1.3rem;
+  }
+}
+
+/* === Toast moderno === */
+.toast-container {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  z-index: 1055;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toast-message {
+  background-color: #0b7d3e;
+  color: #fff;
+  padding: 1rem 1.5rem;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  font-size: 1rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 260px;
+  gap: 0.5rem;
+  animation: fadeInUp 0.5s ease, fadeOutDown 0.6s ease 3.4s forwards;
+}
+
+/* Animaciones suaves */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOutDown {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}

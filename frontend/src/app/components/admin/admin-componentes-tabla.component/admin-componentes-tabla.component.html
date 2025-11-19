@@ -1,0 +1,205 @@
+<section class="admin-componentes">
+
+  <!-- HEADER -->
+  <header class="admin-header mb-4">
+    <div class="d-flex align-items-center gap-2">
+      <div class="header-icon">
+        <i class="bi bi-hdd-stack-fill"></i>
+      </div>
+      <div>
+        <h2 class="mb-0 fw-bold">Tech Reboot · Admin</h2>
+        <p class="admin-subtitle mb-0">Gestión de componentes registrados</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- TOOLBAR -->
+  <div class="admin-toolbar mb-4">
+    
+    <!-- BUSCADOR -->
+    <div class="search-wrapper glass">
+      <i class="bi bi-search"></i>
+      <input
+        type="text"
+        placeholder="Buscar por nombre, categoría, estado, usuario..."
+        [(ngModel)]="filtro"
+        (input)="filtrar()"
+      />
+    </div>
+
+    <!-- RECARGAR -->
+    <button class="btn-reload btn-animate" (click)="cargarTodos()">
+      <i class="bi bi-arrow-repeat me-1"></i>
+      Recargar
+    </button>
+
+  </div>
+
+  <!-- TABLA GLASS PRO -->
+  <div class="tabla-card shadow-green table-responsive">
+
+    <table class="table custom-table align-middle mb-0">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Categoría</th>
+          <th>Estado</th>
+          <th>Ubicación</th>
+          <th>Fecha</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <!-- FILAS -->
+        <tr *ngFor="let c of listaFiltrada"
+            [ngClass]="{ 'fila-editando': editingId === c._id }">
+
+          <!-- NOMBRE -->
+          <td class="fw-semibold">{{ c.nombre }}</td>
+
+          <!-- CATEGORÍA -->
+          <td class="text-capitalize">{{ c.categoria }}</td>
+
+          <!-- ESTADO -->
+          <td class="celda-estado">
+            <ng-container *ngIf="editingId === c._id; else estadoView">
+              <select class="form-select form-select-sm estado-select" [(ngModel)]="editBuffer.estado">
+                <option *ngFor="let e of estados" [value]="e">{{ e }}</option>
+              </select>
+            </ng-container>
+            <ng-template #estadoView>
+              <span class="badge-estado" [ngClass]="'estado-' + c.estado">
+                {{ c.estado }}
+              </span>
+            </ng-template>
+          </td>
+
+          <!-- UBICACIÓN -->
+          <td>
+            <ng-container *ngIf="editingId === c._id; else ubView">
+              <input
+                class="form-control form-control-sm campo-inline"
+                [(ngModel)]="editBuffer.ubicacion" />
+            </ng-container>
+            <ng-template #ubView>
+              {{ c.ubicacion || '—' }}
+            </ng-template>
+          </td>
+
+          <!-- FECHA -->
+          <td>
+            {{ c.fechaIngreso ? (c.fechaIngreso | date:'dd/MM/yyyy') : '—' }}
+          </td>
+
+          <!-- ACCIONES -->
+          <td class="text-center">
+
+            <!-- MODO EDICIÓN -->
+            <ng-container *ngIf="editingId === c._id; else botonesNormales">
+              <button
+                class="btn btn-sm btn-success btn-accion btn-animate me-1"
+                (click)="guardarEdicion(c)">
+                <i class="bi bi-check-lg"></i>
+              </button>
+
+              <button
+                class="btn btn-sm btn-secondary btn-accion btn-animate"
+                (click)="cancelarEdicion()">
+                <i class="bi bi-x-lg"></i>
+              </button>
+            </ng-container>
+
+            <!-- MODO NORMAL -->
+            <ng-template #botonesNormales>
+
+              <!-- EDITAR -->
+              <button
+                class="btn btn-sm btn-warning btn-accion btn-animate me-1"
+                (click)="comenzarEdicion(c)">
+                <i class="bi bi-pencil-square"></i>
+              </button>
+
+              <!-- ELIMINAR -->
+              <button
+                class="btn btn-sm btn-danger btn-accion btn-animate me-1"
+                (click)="eliminar(c)">
+                <i class="bi bi-trash3-fill"></i>
+              </button>
+
+              <!-- VER DETALLES -->
+              <button
+                class="btn-ver-detalles ms-1"
+                (click)="verDetalles(c)">
+                Ver detalles
+              </button>
+
+            </ng-template>
+
+          </td>
+
+        </tr>
+
+        <!-- VACÍO -->
+        <tr *ngIf="listaFiltrada.length === 0">
+          <td colspan="6" class="text-center text-muted py-4">
+            <i class="bi bi-exclamation-circle me-2"></i>
+            No hay componentes registrados.
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+
+  </div>
+
+  <!-- PANEL DE DETALLES GLASS PRO -->
+  <section *ngIf="componenteSeleccionado" class="admin-componentes__detalle">
+    <header>
+      <h3>Detalle del componente</h3>
+      <button type="button" (click)="cerrarDetalles()">Cerrar</button>
+    </header>
+
+    <div class="detalle-grid">
+      <div>
+        <h4>Información general</h4>
+        <p><strong>Nombre:</strong> {{ componenteSeleccionado.nombre }}</p>
+        <p><strong>Categoría:</strong> {{ componenteSeleccionado.categoria }}</p>
+        <p><strong>Estado:</strong> {{ componenteSeleccionado.estado }}</p>
+      </div>
+
+      <div>
+        <h4>Ubicación y logística</h4>
+        <p><strong>Ubicación:</strong> {{ componenteSeleccionado.ubicacion || '—' }}</p>
+        <p><strong>Peso (kg):</strong> {{ componenteSeleccionado.pesoKg || '—' }}</p>
+        <p><strong>Responsable:</strong> {{ componenteSeleccionado.responsable || '—' }}</p>
+      </div>
+
+      <div>
+        <h4>Usuario</h4>
+        <p><strong>Registrado por:</strong> {{ componenteSeleccionado.usuarioEmail }}</p>
+        <p><strong>Fecha ingreso:</strong>
+          {{ componenteSeleccionado.fechaIngreso | date:'dd/MM/yyyy' }}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ✅ Toast flotante local (éxito / error) -->
+  <div
+    *ngIf="toastVisible"
+    class="admin-toast"
+    [ngClass]="{
+      'admin-toast--success': toastType === 'success',
+      'admin-toast--error': toastType === 'error'
+    }"
+  >
+    <i
+      class="bi me-2"
+      [ngClass]="toastType === 'success' ? 'bi-check-circle-fill' : 'bi-x-circle-fill'"
+    ></i>
+    <span>{{ toastMessage }}</span>
+  </div>
+
+</section>

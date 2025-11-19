@@ -1,0 +1,140 @@
+<div class="admin-layout">
+
+  <!-- SIDEBAR -->
+  <aside
+    class="admin-sidebar"
+    [class.admin-sidebar--collapsed]="!sidebarAbierto"
+  >
+    <div class="admin-sidebar__header">
+      <div class="admin-logo">
+        <span class="admin-logo__icon">⚙️</span>
+        <span class="admin-logo__text">Panel Admin</span>
+      </div>
+    </div>
+
+    <nav class="admin-nav">
+      <p class="admin-nav__label">Gestión</p>
+
+      <!-- /admin/componentes -->
+      <a
+        routerLink="/admin/componentes"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="admin-nav__item"
+        (click)="onNavClick()"
+      >
+        <i class="bi bi-hdd-stack"></i>
+        <span>Ver componentes</span>
+      </a>
+
+      <!-- /admin/registrar-componente -->
+      <a
+        routerLink="/admin/registrar-componente"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="admin-nav__item"
+        (click)="onNavClick()"
+      >
+        <i class="bi bi-plus-circle"></i>
+        <span>Registrar componente</span>
+      </a>
+
+      <!-- /admin/solicitudes -->
+      <a
+        routerLink="/admin/solicitudes"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="admin-nav__item"
+        (click)="onNavClick()"
+      >
+        <i class="bi bi-inbox"></i>
+        <span>Ver solicitudes</span>
+      </a>
+
+      <!-- /admin/contactos -->
+      <a
+        routerLink="/admin/contactos"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="admin-nav__item"
+        (click)="onNavClick()"
+      >
+        <i class="bi bi-envelope-paper"></i>
+        <span>Mensajes contacto</span>
+      </a>
+    </nav>
+
+    <div class="admin-sidebar__footer">
+      <!-- volver al landing -->
+      <a
+        routerLink="/inicio"
+        class="admin-nav__item admin-nav__item--secondary"
+        (click)="onNavClick()"
+      >
+        <i class="bi bi-arrow-left-circle"></i>
+        <span>Volver al sitio</span>
+      </a>
+
+      <!-- CERRAR SESIÓN FUNCIONAL -->
+      <button
+        class="admin-logout-btn"
+        type="button"
+        (click)="logout()"
+      >
+        <i class="bi bi-box-arrow-right"></i>
+        <span>Cerrar sesión</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- CONTENIDO -->
+  <div class="admin-main">
+
+    <!-- TOPBAR -->
+    <header class="admin-topbar">
+      <button
+        type="button"
+        class="admin-topbar__toggle"
+        (click)="toggleSidebar()"
+      >
+        <i class="bi" [ngClass]="sidebarAbierto ? 'bi-x-lg' : 'bi-list'"></i>
+      </button>
+
+      <div class="admin-topbar__title">
+        <h1>Tech Reboot · Admin</h1>
+        <p>Gestiona componentes, solicitudes y más.</p>
+      </div>
+
+      <div class="admin-topbar__user">
+        <div class="admin-user-pill">
+          <span class="admin-user-pill__avatar">A</span>
+          <div class="admin-user-pill__text">
+            <span class="admin-user-pill__name">Admin</span>
+            <span class="admin-user-pill__role">Administrador</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- AQUÍ VAN LAS PANTALLAS HIJAS DEL PANEL ADMIN -->
+    <main class="admin-content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+
+  <!-- ✅ Toast flotante layout admin -->
+  <div
+    *ngIf="toastVisible"
+    class="admin-layout__toast"
+    [ngClass]="{
+      'admin-layout__toast--success': toastType === 'success',
+      'admin-layout__toast--error': toastType === 'error'
+    }"
+  >
+    <i
+      class="bi me-2"
+      [ngClass]="toastType === 'success' ? 'bi-check-circle-fill' : 'bi-x-circle-fill'"
+    ></i>
+    <span>{{ toastMessage }}</span>
+  </div>
+</div>

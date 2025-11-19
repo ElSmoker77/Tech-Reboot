@@ -1,0 +1,87 @@
+<section class="admin-contactos">
+  <!-- HEADER -->
+  <header class="admin-contactos__header">
+    <div class="admin-contactos__header-main">
+      <div class="d-flex align-items-center gap-2">
+        <div class="header-icon">
+          <i class="bi bi-envelope-paper"></i>
+        </div>
+        <div>
+          <h2>Mensajes de contacto</h2>
+          <p class="admin-contactos__subtitle">
+            Consulta los mensajes enviados desde el formulario "Contáctanos".
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <span class="admin-badge">
+      <i class="bi bi-chat-dots-fill"></i>
+      {{ mensajes.length }} mensaje(s)
+    </span>
+  </header>
+
+  <!-- ESTADO CARGA -->
+  <div *ngIf="cargando" class="admin-contactos__state">
+    Cargando mensajes...
+  </div>
+
+  <!-- ESTADO ERROR -->
+  <div
+    *ngIf="!cargando && error"
+    class="admin-contactos__state admin-contactos__state--error"
+  >
+    {{ error }}
+  </div>
+
+  <!-- TABLA -->
+  <div
+    class="admin-contactos__table-wrapper"
+    *ngIf="!cargando && !error"
+  >
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th style="width: 20%;">Nombre</th>
+          <th style="width: 20%;">Correo</th>
+          <th style="width: 40%;">Mensaje</th>
+          <th style="width: 20%;">Fecha</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="mensajes.length === 0">
+          <td colspan="4" class="text-center py-3">
+            No hay mensajes aún.
+          </td>
+        </tr>
+
+        <tr *ngFor="let m of mensajes">
+          <td>{{ m.nombre }}</td>
+          <td>{{ m.correo }}</td>
+          <td>
+            <span class="texto-recortado" [title]="m.mensaje">
+              {{ m.mensaje }}
+            </span>
+          </td>
+          <td>{{ fmtFecha(m.createdAt) }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ✅ Toast flotante local -->
+  <div
+    *ngIf="toastVisible"
+    class="admin-contactos__toast"
+    [ngClass]="{
+      'admin-contactos__toast--success': toastType === 'success',
+      'admin-contactos__toast--error': toastType === 'error'
+    }"
+  >
+    <i
+      class="bi me-2"
+      [ngClass]="toastType === 'success' ? 'bi-check-circle-fill' : 'bi-x-circle-fill'"
+    ></i>
+    <span>{{ toastMessage }}</span>
+  </div>
+</section>

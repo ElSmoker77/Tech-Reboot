@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var DestroyMode = /*#__PURE__*/function (DestroyMode) {\n  DestroyMode[\"none\"] = \"none\";\n  DestroyMode[\"split\"] = \"split\";\n  return DestroyMode;\n}(DestroyMode || {});","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

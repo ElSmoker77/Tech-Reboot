@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { Engine } from \"./Core/Engine.js\";\nexport function init() {\n  const engine = new Engine();\n  engine.init();\n  return engine;\n}","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

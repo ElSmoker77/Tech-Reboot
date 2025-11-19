@@ -1,0 +1,215 @@
+<div class="admin-solicitudes">
+  <header class="admin-solicitudes__header">
+    <div>
+      <h2>Historial de solicitudes de afiliado</h2>
+      <p>Revisa, filtra y gestiona las solicitudes enviadas por los usuarios.</p>
+    </div>
+
+    <div class="admin-solicitudes__controls">
+      <label>
+        <span>Estado:</span>
+        <select
+          [ngModel]="filtroEstado"
+          (ngModelChange)="onCambiarFiltroEstado($event)"
+        >
+          <option value="todas">Todas</option>
+          <option value="pendiente">Pendiente</option>
+          <option value="en_revision">En revisión</option>
+          <option value="aprobada">Aprobada</option>
+          <option value="rechazada">Rechazada</option>
+        </select>
+      </label>
+
+      <button type="button" (click)="cargarSolicitudes()">
+        Recargar
+      </button>
+    </div>
+  </header>
+
+  <!-- estados de carga / error -->
+  <div *ngIf="cargando" class="admin-solicitudes__state">
+    Cargando solicitudes...
+  </div>
+
+  <div
+    *ngIf="error && !cargando"
+    class="admin-solicitudes__state admin-solicitudes__state--error"
+  >
+    {{ error }}
+  </div>
+
+  <div
+    *ngIf="!cargando && !error && solicitudes.length === 0"
+    class="admin-solicitudes__state"
+  >
+    No hay solicitudes para mostrar.
+  </div>
+
+  <!-- tabla -->
+  <div
+    *ngIf="!cargando && !error && solicitudes.length > 0"
+    class="admin-solicitudes__table-wrapper"
+  >
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Correo</th>
+          <th>Ciudad</th>
+          <th>Tipo organización</th>
+          <th>Estado</th>
+          <th>Fecha solicitud</th>
+          <th class="admin-table__actions">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let s of solicitudes">
+          <td>{{ s.nombreCompleto }}</td>
+          <td>{{ s.correo }}</td>
+          <td>{{ s.ciudad }}</td>
+          <td>{{ s.tipoOrganizacion }}</td>
+          <td>
+            <span [ngClass]="badgeClass(s.estado)">
+              {{ estadoLabels[s.estado || 'pendiente'] }}
+            </span>
+          </td>
+          <td>{{ formatearFecha(s.fechaSolicitud || s.createdAt) }}</td>
+
+          <!-- BOTONES CON EL MISMO ESTILO QUE COMPONENTES -->
+          <td class="admin-table__actions">
+
+            <!-- Ver detalle -->
+            <button
+              type="button"
+              class="btn-ver-detalles btn-mini"
+              (click)="verDetalle(s)"
+              title="Ver detalle"
+            >
+              <i class="bi bi-eye"></i>
+            </button>
+
+            <!-- En revisión -->
+            <button
+              type="button"
+              class="btn-mini btn-accion btn-secondary btn-animate"
+              [disabled]="actualizandoEstado || s.estado === 'en_revision'"
+              (click)="cambiarEstado(s, 'en_revision')"
+              title="Marcar en revisión"
+            >
+              <i class="bi bi-hourglass-split"></i>
+            </button>
+
+            <!-- Aprobar -->
+            <button
+              type="button"
+              class="btn-mini btn-accion btn-success btn-animate"
+              [disabled]="actualizandoEstado || s.estado === 'aprobada'"
+              (click)="cambiarEstado(s, 'aprobada')"
+              title="Aprobar solicitud"
+            >
+              <i class="bi bi-check-lg"></i>
+            </button>
+
+            <!-- Rechazar -->
+            <button
+              type="button"
+              class="btn-mini btn-accion btn-danger btn-animate"
+              [disabled]="actualizandoEstado || s.estado === 'rechazada'"
+              (click)="cambiarEstado(s, 'rechazada')"
+              title="Rechazar solicitud"
+            >
+              <i class="bi bi-x-lg"></i>
+            </button>
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- detalle -->
+  <section *ngIf="solicitudSeleccionada" class="admin-solicitudes__detalle">
+    <header>
+      <h3>Detalle de solicitud</h3>
+      <button type="button" (click)="cerrarDetalle()">Cerrar</button>
+    </header>
+
+    <div class="detalle-grid">
+      <div>
+        <h4>Datos del solicitante</h4>
+        <p><strong>Nombre:</strong> {{ solicitudSeleccionada.nombreCompleto }}</p>
+        <p><strong>Correo:</strong> {{ solicitudSeleccionada.correo }}</p>
+        <p><strong>Teléfono:</strong> {{ solicitudSeleccionada.telefono }}</p>
+        <p><strong>Dirección:</strong> {{ solicitudSeleccionada.direccion }}</p>
+        <p><strong>Ciudad:</strong> {{ solicitudSeleccionada.ciudad }}</p>
+        <p><strong>Región:</strong> {{ solicitudSeleccionada.region }}</p>
+      </div>
+
+      <div>
+        <h4>Organización</h4>
+        <p><strong>Tipo:</strong> {{ solicitudSeleccionada.tipoOrganizacion }}</p>
+        <p>
+          <strong>Descripción:</strong>
+          {{ solicitudSeleccionada.descripcionOrganizacion }}
+        </p>
+        <p>
+          <strong>Capacidad de almacenamiento:</strong>
+          {{ solicitudSeleccionada.capacidadAlmacenamiento }}
+        </p>
+        <p>
+          <strong>Certificaciones:</strong>
+          {{ solicitudSeleccionada.certificaciones || 'No indicado' }}
+        </p>
+      </div>
+
+      <div>
+        <h4>Compromiso y experiencia</h4>
+        <p>
+          <strong>Experiencia en reciclaje:</strong>
+          {{ solicitudSeleccionada.experienciaReciclaje ? 'Sí' : 'No' }}
+        </p>
+        <p>
+          <strong>Compromiso ambiental:</strong>
+          {{ solicitudSeleccionada.compromisoAmbiental ? 'Sí' : 'No' }}
+        </p>
+        <p>
+          <strong>Disponibilidad horaria:</strong>
+          {{ solicitudSeleccionada.disponibilidadHoraria }}
+        </p>
+      </div>
+
+      <div>
+        <h4>Mensaje adicional</h4>
+        <p>
+          {{ solicitudSeleccionada.mensajeAdicional || 'Sin mensaje adicional.' }}
+        </p>
+      </div>
+
+      <div *ngIf="solicitudSeleccionada.requisitosAceptados?.length">
+        <h4>Requisitos aceptados</h4>
+        <ul>
+          <li *ngFor="let r of solicitudSeleccionada.requisitosAceptados">
+            <span>{{ r.id }}</span>
+            <span *ngIf="r.aceptado"> ✅</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ✅ Toast flotante local -->
+  <div
+    *ngIf="toastVisible"
+    class="admin-solicitudes__toast"
+    [ngClass]="{
+      'admin-solicitudes__toast--success': toastType === 'success',
+      'admin-solicitudes__toast--error': toastType === 'error'
+    }"
+  >
+    <i
+      class="bi me-2"
+      [ngClass]="toastType === 'success' ? 'bi-check-circle-fill' : 'bi-x-circle-fill'"
+    ></i>
+    <span>{{ toastMessage }}</span>
+  </div>
+</div>

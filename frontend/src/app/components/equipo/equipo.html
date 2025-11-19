@@ -1,0 +1,58 @@
+<div class="equipo">
+  <div class="flex items-center gap-2 mb-3">
+    <span class="text-xl" aria-hidden="true">👥</span>
+    <h2 class="text-3xl font-bold">Nuestro equipo</h2>
+  </div>
+
+  <p class="mt-1 text-gray-700 text-sm mb-4 max-w-xl">
+    Somos un equipo pequeño pero terco con la idea de que la tecnología puede tener
+    una segunda vida. Si necesitas coordinar entregas, talleres o alianzas, puedes
+    escribirle directamente a cualquiera de nosotras/os.
+  </p>
+
+  <div class="grid sm:grid-cols-3 gap-4 equipo-grid">
+    <article
+      *ngFor="let persona of miembros"
+      class="equipo-card rounded-2xl bg-white/80 shadow-md border border-emerald-50 p-4 flex flex-col items-start gap-3"
+    >
+      <div class="flex items-center gap-3 w-full">
+        <img
+          [src]="persona.foto"
+          [alt]="'Foto de ' + persona.nombre"
+          class="equipo-foto"
+        />
+        <div class="text-sm">
+          <h3 class="font-semibold text-slate-900 leading-tight">
+            {{ persona.nombre }}
+          </h3>
+          <p class="text-emerald-700 text-xs font-medium">
+            {{ persona.rol }}
+          </p>
+        </div>
+      </div>
+
+      <p class="text-[11px] text-slate-600">
+        {{ persona.descripcion }}
+      </p>
+
+      <a
+        [href]="'mailto:' + persona.email"
+        class="inline-flex items-center gap-1 text-[11px] text-emerald-700 mt-auto hover:underline"
+      >
+        <i class="bi bi-envelope-open"></i>
+        {{ persona.email }}
+      </a>
+    </article>
+  </div>
+
+  <div class="equipo-extra text-[11px] text-slate-700 max-w-md">
+    <p class="font-semibold text-emerald-800 mb-1">
+      ¿Cómo gestionamos tu mensaje?
+    </p>
+    <ul class="list-disc list-inside space-y-1">
+      <li>Respondemos normalmente dentro de <strong>24–48 horas hábiles</strong>.</li>
+      <li>Si tu consulta es por retiro de equipos, indica <strong>comuna y tipo de material</strong>.</li>
+      <li>Para propuestas de talleres o alianzas, cuéntanos brevemente la idea y fechas tentativas.</li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var OutMode = /*#__PURE__*/function (OutMode) {\n  OutMode[\"bounce\"] = \"bounce\";\n  OutMode[\"none\"] = \"none\";\n  OutMode[\"out\"] = \"out\";\n  OutMode[\"destroy\"] = \"destroy\";\n  OutMode[\"split\"] = \"split\";\n  return OutMode;\n}(OutMode || {});","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

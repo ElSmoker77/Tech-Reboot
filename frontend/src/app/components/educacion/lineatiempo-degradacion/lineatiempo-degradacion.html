@@ -1,0 +1,152 @@
+<!--
+  Sección de tiempo de degradación
+  👉 Mantenemos la clase --tight para que quede pegado al menú superior
+-->
+<section class="degradacion-section degradacion-section--tight">
+  <!--
+    Ya NO hay header arriba.
+    Pasamos la pregunta a la parte izquierda, sobre la línea de tiempo.
+  -->
+
+  <!-- TARJETA GRANDE QUE UNE LÍNEA + CONTENIDO -->
+  <div class="degradacion-layout">
+    <div class="degradacion-layout__grid">
+      <!-- IZQUIERDA: línea de tiempo -->
+      <div class="degradacion-layout__left">
+        <!-- Pregunta principal ahora dentro de la tarjeta -->
+        <h3 class="degradacion-bar__title degradacion-bar__title--question">
+          ¿Cuánto tarda en degradarse?
+        </h3>
+
+        <div class="degradacion-bar degradacion-bar--vertical">
+          <div class="degradacion-bar-v__track">
+            <!-- Escala de tiempo -->
+            <div class="degradacion-bar-v__scale">
+              <div
+                class="degradacion-bar-v__scale-item degradacion-bar-v__scale-item--meses"
+              >
+                <span class="degradacion-bar-v__scale-mark"></span>
+                <span class="degradacion-bar-v__scale-label-main">Meses</span>
+              </div>
+
+              <div
+                class="degradacion-bar-v__scale-item degradacion-bar-v__scale-item--anios"
+              >
+                <span class="degradacion-bar-v__scale-mark"></span>
+                <span class="degradacion-bar-v__scale-label-main">Años</span>
+              </div>
+
+              <div
+                class="degradacion-bar-v__scale-item degradacion-bar-v__scale-item--decadas"
+              >
+                <span class="degradacion-bar-v__scale-mark"></span>
+                <span class="degradacion-bar-v__scale-label-main">Décadas</span>
+              </div>
+
+              <div
+                class="degradacion-bar-v__scale-item degradacion-bar-v__scale-item--siglos"
+              >
+                <span class="degradacion-bar-v__scale-mark"></span>
+                <span class="degradacion-bar-v__scale-label-main">Siglos+</span>
+              </div>
+            </div>
+
+            <!-- Ítems en zigzag -->
+            <button
+              *ngFor="let residuo of residuos; let i = index"
+              type="button"
+              class="degradacion-bar-v__item"
+              [ngClass]="
+                i % 2 === 0
+                  ? 'degradacion-bar-v__item--left'
+                  : 'degradacion-bar-v__item--right'
+              "
+              [style.top.%]="residuo.posicion"
+              (click)="seleccionarResiduo(residuo)"
+              [attr.aria-pressed]="seleccionado?.id === residuo.id"
+            >
+              <!-- icono -->
+              <div class="degradacion-bar-v__icon-wrapper">
+                <div
+                  class="degradacion-bar-v__icon"
+                  [class.degradacion-bar-v__icon--active]="
+                    seleccionado?.id === residuo.id
+                  "
+                >
+                  {{ residuo.icono }}
+                </div>
+              </div>
+
+              <!-- nombre debajo del icono -->
+              <span class="degradacion-bar-v__label">
+                {{ residuo.nombre }}
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- DERECHA: contenido del residuo seleccionado -->
+      <div class="degradacion-layout__right" *ngIf="seleccionado as r">
+        <div class="degradacion-card">
+          <div class="degradacion-card__inner">
+            <p class="degradacion-card__eyebrow">
+              {{ r.tipo }} · {{ r.categoriaTiempo }}
+            </p>
+
+            <h3 class="degradacion-card__title">
+              {{ r.nombre }}
+            </h3>
+
+            <div class="degradacion-card__pill">
+              ⏱ Tiempo de degradación aprox.: {{ r.tiempoLabel }}
+            </div>
+
+            <div class="degradacion-card__section">
+              <h4 class="degradacion-card__section-title">
+                <span class="degradacion-card__section-icon">📌</span>
+                ¿Qué significa?
+              </h4>
+              <p class="degradacion-card__body">
+                {{ r.resumen }}
+              </p>
+            </div>
+
+            <div class="degradacion-card__section">
+              <h4 class="degradacion-card__section-title">
+                <span class="degradacion-card__section-icon">🌍</span>
+                Impacto ambiental
+              </h4>
+              <ul class="degradacion-card__list">
+                <li *ngFor="let punto of r.impacto">
+                  {{ punto }}
+                </li>
+              </ul>
+            </div>
+
+            <div class="degradacion-card__section degradacion-card__example">
+              <h4 class="degradacion-card__section-title">
+                <span class="degradacion-card__section-icon">💡</span>
+                ¿Qué puedo hacer?
+              </h4>
+              <p class="degradacion-card__body">
+                {{ r.consejo }}
+              </p>
+            </div>
+
+            <div class="degradacion-card__section">
+              <h4 class="degradacion-card__section-title">
+                <span class="degradacion-card__section-icon">🔍</span>
+                Ejemplo cotidiano
+              </h4>
+              <p class="degradacion-card__body degradacion-card__body--example">
+                {{ r.ejemplo }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- FIN DERECHA -->
+    </div>
+  </div>
+</section>

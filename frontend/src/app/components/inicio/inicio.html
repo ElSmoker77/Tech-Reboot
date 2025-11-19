@@ -1,0 +1,318 @@
+<div class="min-h-screen w-full font-sans text-gray-900">
+  <!-- NAVBAR -->
+  <header class="sticky top-0 z-50 backdrop-blur bg-white/70 border-b border-gray-100">
+    <div class="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
+      <a href="#inicio" class="flex items-center gap-2">
+        <span class="text-xl">♻️</span>
+        <span class="font-bold">Tech Reboot Acopio</span>
+      </a>
+
+      <!-- Links de navegación desktop -->
+      <nav class="hidden md:flex items-center gap-6 text-sm">
+        <a href="#inicio" class="hover:text-green-700">Inicio</a>
+        <a href="#nosotros" class="hover:text-green-700">Nosotros</a>
+        <a href="#educacion" class="hover:text-green-700">Economía Circular</a>
+        <a href="#mapa" class="hover:text-green-700">Mapa de Acopios</a>
+        <a href="#contacto" class="hover:text-green-700">Contacto</a>
+      </nav>
+
+      <!-- Botón directo: Registrar componente -->
+<div>
+  <button
+    type="button"
+    (click)="irARegistroComponentes()"
+    class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-2xl transition border bg-green-600 text-white border-green-600 hover:bg-green-700"
+  >
+    <i class="bi bi-box-seam mr-2"></i>
+    Registrar componente
+  </button>
+</div>
+</div>
+</header>
+
+  <main>
+    <!-- HERO -->
+    <section
+      id="inicio"
+      class="relative overflow-hidden bg-gradient-to-b from-green-50 to-white"
+    >
+      <div
+        class="mx-auto max-w-7xl px-4 py-24 grid lg:grid-cols-2 gap-10 items-center"
+      >
+        <div>
+          <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">
+            Transformamos la
+            <span class="text-green-700">basura electrónica</span> en
+            oportunidades
+          </h1>
+          <p class="mt-4 text-lg text-gray-700">
+            Somos un punto de acopio técnico. Rescatamos componentes útiles,
+            reacondicionamos equipos y derivamos el resto a reciclaje
+            certificado.
+          </p>
+          <div class="mt-6 flex gap-3">
+            <a
+              href="#mapa"
+              class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-2xl transition border bg-green-600 text-white border-green-600 hover:bg-green-700"
+              >Ver mapa de acopios</a
+            >
+            <a
+              href="#educacion"
+              class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-2xl transition border bg-white text-gray-900 border-gray-300 hover:bg-gray-50"
+              >¿Por qué reciclar?</a
+            >
+          </div>
+          <ul class="mt-6 space-y-2 text-sm">
+            <li class="flex items-center gap-2">
+              <span class="text-green-700">✔</span> Derivación a entidades
+              certificadas
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="text-green-700">✔</span> Trazabilidad básica de
+              entregas
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="text-green-700">✔</span> Apoyo a reparación y
+              reutilización
+            </li>
+          </ul>
+        </div>
+        <div>
+          <div
+            class="aspect-video w-full rounded-2xl bg-white shadow-lg border border-gray-100 overflow-hidden"
+          >
+            <iframe
+              class="w-full h-full rounded-xl"
+              src="https://www.youtube.com/embed/WxZdB4NU3VI?rel=0"
+              title="Video Tech Reboot Acopio"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            >
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NOSOTROS -->
+    <section id="nosotros" class="mx-auto max-w-7xl px-4 py-16">
+      <div class="grid lg:grid-cols-3 gap-6">
+        <!-- 1. Puntos de acopio -->
+        <app-card title="Puntos de acopio comunitarios">
+          Habilitamos <strong>puntos de recepción</strong> en Los Sauces para
+          que vecinas y vecinos puedan dejar sus equipos en desuso:
+          computadores, notebooks, celulares, cables y periféricos. Clasificamos
+          lo recibido para separar lo que se puede
+          <strong>reutilizar</strong> de lo que debe ir a reciclaje.
+        </app-card>
+
+        <!-- 2. Reacondicionamiento -->
+        <app-card title="Revisión y reacondicionamiento">
+          Probamos cada equipo y componente. Lo que aún tiene vida útil se
+          <strong>limpia, repara y formatea</strong> para que pueda volver a
+          usarse en proyectos educativos, organizaciones sociales o familias que
+          lo necesiten. Así alargamos la vida de la tecnología en vez de que
+          termine en la basura.
+        </app-card>
+
+        <!-- 3. Derivación responsable -->
+        <app-card title="Derivación responsable de residuos">
+          Los equipos que ya no se pueden recuperar se almacenan de forma segura
+          mientras avanzamos en convenios con
+          <strong>gestores de residuos electrónicos</strong>. Nuestro objetivo es
+          que, a medida que crezcamos, todo el e-waste recolectado se entregue a
+          recicladores formales y trazables.
+        </app-card>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="bg-green-50/60 border-y border-green-100/60 backdrop-blur-sm">
+      <div class="mx-auto max-w-7xl px-4 py-16">
+        <div *ngIf="cargandoStats" class="text-center text-sm text-gray-500 mb-4">
+          Calculando el impacto de Tech Reboot...
+        </div>
+
+        <div *ngIf="errorStats" class="text-center text-sm text-red-600 mb-4">
+          {{ errorStats }}
+        </div>
+
+        <div
+          class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
+          *ngIf="stats.length > 0"
+        >
+          <div
+            *ngFor="let s of stats"
+            class="rounded-2xl bg-white/70 shadow-sm border border-white/60 p-6 text-center backdrop-blur-sm"
+          >
+            <div class="text-4xl font-extrabold">
+              {{ fmt(s.value) }}
+            </div>
+            <div class="mt-2 text-sm text-gray-600">
+              {{ s.label }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCACIÓN -->
+    <section id="educacion" class="mx-auto max-w-7xl px-4 py-16">
+      <!-- TÍTULO -->
+      <header class="mb-6">
+        <h2
+          class="text-sm font-semibold tracking-[0.18em] text-emerald-700 uppercase"
+        >
+          Educación
+        </h2>
+        <p class="mt-1 text-2xl font-bold text-slate-900">
+          Aprende qué pasa con tus residuos electrónicos
+        </p>
+        <p class="mt-1 text-sm text-slate-600">
+          Explora cómo funciona la economía circular, cuánto tardan en
+          degradarse los materiales y cómo preparar tus equipos antes de
+          entregarlos en un punto de acopio.
+        </p>
+      </header>
+
+      <!-- TABS / BOTONES -->
+      <nav
+        class="inline-flex flex-wrap gap-2 rounded-full bg-emerald-50/60 px-1.5 py-1.5 mb-3"
+        aria-label="Secciones de información educativa"
+      >
+        <button
+          type="button"
+          class="inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-semibold transition hover:bg-white/80 hover:shadow-sm"
+          [ngClass]="
+            infoTabSeleccionado === 'economia'
+              ? 'bg-white shadow-sm text-emerald-800'
+              : 'text-emerald-700/80'
+          "
+          (click)="cambiarTab('economia')"
+        >
+          <span>♻️</span>
+          <span>Economía circular</span>
+        </button>
+
+        <button
+          type="button"
+          class="inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-semibold transition hover:bg-white/80 hover:shadow-sm"
+          [ngClass]="
+            infoTabSeleccionado === 'degradacion'
+              ? 'bg-white shadow-sm text-emerald-800'
+              : 'text-emerald-700/80'
+          "
+          (click)="cambiarTab('degradacion')"
+        >
+          <span>⏳</span>
+          <span>Tiempo de degradación</span>
+        </button>
+
+        <button
+          type="button"
+          class="inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-semibold transition hover:bg-white/80 hover:shadow-sm"
+          [ngClass]="
+            infoTabSeleccionado === 'preacopio'
+              ? 'bg-white shadow-sm text-emerald-800'
+              : 'text-emerald-700/80'
+          "
+          (click)="cambiarTab('preacopio')"
+        >
+          <span>🧳</span>
+          <span>Cómo preparar tu residuo</span>
+        </button>
+      </nav>
+
+      <!-- CONTENIDO DINÁMICO SEGÚN TAB -->
+      <div class="space-y-8">
+        <ng-container [ngSwitch]="infoTabSeleccionado">
+          <!-- TAB 1: DIAGRAMA ECONOMÍA CIRCULAR -->
+          <ng-container *ngSwitchCase="'economia'">
+            <app-diagramaeconomia></app-diagramaeconomia>
+          </ng-container>
+
+          <!-- TAB 2: LÍNEA DE TIEMPO DEGRADACIÓN -->
+          <ng-container *ngSwitchCase="'degradacion'">
+            <app-lineatiempo-degradacion></app-lineatiempo-degradacion>
+          </ng-container>
+
+          <!-- TAB 3: PREACOPIO -->
+          <ng-container *ngSwitchCase="'preacopio'">
+            <section id="preacopio" class="mt-4">
+              <app-lineatiempo-preacopio></app-lineatiempo-preacopio>
+            </section>
+          </ng-container>
+        </ng-container>
+      </div>
+
+      <!-- MINI FOOTER / TARJETAS EXTRA -->
+      <div class="mt-10 grid gap-4 lg:grid-cols-2">
+        <app-card title="¿Qué recibimos?">
+          Computadores, notebooks, placas madre, fuentes, memorias, discos,
+          cables, cargadores, periféricos, celulares y pequeños
+          electrodomésticos. Consulta por CRT, baterías o residuos peligrosos.
+        </app-card>
+
+        <app-card title="¿Cómo prepararlo?">
+          Borra datos sensibles, separa baterías cuando sea posible y embala
+          piezas sueltas para evitar daños.
+        </app-card>
+      </div>
+    </section>
+
+    <!-- MAPA -->
+    <section
+      id="mapa"
+      class="border-y border-green-100/60 bg-white/40 backdrop-blur-sm w-full"
+    >
+      <div class="mx-auto max-w-7xl px-4 py-16">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="text-xl" aria-hidden="true">📍</span>
+          <h2 class="text-3xl font-bold">Mapa de puntos de acopio</h2>
+        </div>
+
+        <p class="text-gray-700 mb-4 text-sm md:text-base max-w-2xl">
+          Encuentra los puntos de reciclaje más cercanos a ti en el mapa
+          interactivo. A medida que abramos nuevos puntos de acopio, los iremos
+          sumando aquí.
+        </p>
+
+        <div class="w-full">
+          <app-localizacion></app-localizacion>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto" class="mx-auto max-w-7xl px-4 py-10">
+      <div class="grid lg:grid-cols-2 gap-10 items-stretch h-full">
+        <!-- IZQUIERDA: Equipo -->
+        <div class="h-full flex flex-col">
+          <app-equipo class="flex-1 block h-full"></app-equipo>
+        </div>
+
+        <!-- DERECHA: Formulario de contacto -->
+        <div class="h-full flex flex-col">
+          <app-contacto class="flex-1 block h-full"></app-contacto>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t bg-white">
+    <div
+      class="mx-auto max-w-7xl px-4 py-8 flex flex-col md:flex-row items-center justify-between gap-4"
+    >
+      <p class="text-sm text-gray-600">
+        © {{ year }} Tech Reboot Acopio. Todos los derechos reservados.
+      </p>
+      <div class="flex gap-4 text-sm">
+        <a href="#nosotros" class="hover:text-green-700">Nosotros</a>
+        <a href="#mapa" class="hover:text-green-700">Mapa</a>
+        <a href="#contacto" class="hover:text-green-700">Contacto</a>
+      </div>
+    </div>
+  </footer>
+</div>
