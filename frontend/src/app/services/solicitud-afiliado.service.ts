@@ -31,7 +31,7 @@ export interface SolicitudAfiliado {
   providedIn: 'root'
 })
 export class SolicitudAfiliadoService {
-  private api = `${environment.apiUrl}/api/solicitudes-afiliado`;
+  private api = `https://tech-reboot.onrender.com/api/solicitudes-afiliado`;
 
   constructor(private http: HttpClient) {}
 

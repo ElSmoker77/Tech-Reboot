@@ -6,7 +6,7 @@ import { environment } from '../../environments/environment.prod';
   providedIn: 'root'
 })
 export class DeviceService {
-  private api = `${environment.apiUrl}/api/devices`;
+  private api = `https://tech-reboot.onrender.com/api/devices`;
 
   constructor() {}
 

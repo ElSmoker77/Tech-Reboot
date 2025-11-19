@@ -28,7 +28,7 @@ const ADMIN_DOMAINS = ['@techreboot-admin.cl'];
 @Injectable({ providedIn: 'root' })
 export class ComponenteServicio {
   // URL base del backend
-  private apiUrl = `${environment.apiUrl}/api/componentes`;
+  private apiUrl = `https://tech-reboot.onrender.com/api/componentes`;
 
   constructor(private http: HttpClient) {}
 

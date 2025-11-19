@@ -6,7 +6,7 @@ import { environment } from '../../environments/environment.prod';
   providedIn: 'root'
 })
 export class TutorialService {
-  private api = `${environment.apiUrl}/api/tutorials`;
+  private api = `https://tech-reboot.onrender.com/api/tutorials`;
 
   constructor() {}
 

@@ -15,7 +15,7 @@ export interface MensajeContacto {
   providedIn: 'root'
 })
 export class ContactService {
-  private api = '${environment.apiUrl}/api/contact';
+  private api = `https://tech-reboot.onrender.com/api/contact`;
 
   async send(data: any) {
     return await axios.post(this.api, data);
