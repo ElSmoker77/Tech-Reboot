@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { lastValueFrom } from 'rxjs';
+import { environment } from '../../environments/environment.prod';
 
 export interface SolicitudAfiliado {
   _id?: string;
@@ -30,7 +31,7 @@ export interface SolicitudAfiliado {
   providedIn: 'root'
 })
 export class SolicitudAfiliadoService {
-  private api = 'http://localhost:4000/api/solicitudes-afiliado';
+  private api = '${environment.apiUrl}/api/solicitudes-afiliado';
 
   constructor(private http: HttpClient) {}
 

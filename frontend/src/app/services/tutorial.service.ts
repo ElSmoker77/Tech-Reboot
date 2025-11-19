@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TutorialService {
-  private api = 'http://localhost:4000/api/tutorials';
+  private api = '${environment.apiUrl}/api/tutorials';
 
   constructor() {}
 

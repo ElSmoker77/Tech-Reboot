@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
+import { environment } from '../../environments/environment.prod';
 
 export interface MensajeContacto {
   _id: string;
@@ -14,7 +15,7 @@ export interface MensajeContacto {
   providedIn: 'root'
 })
 export class ContactService {
-  private api = 'http://localhost:4000/api/contact';
+  private api = '${environment.apiUrl}/api/contact';
 
   async send(data: any) {
     return await axios.post(this.api, data);

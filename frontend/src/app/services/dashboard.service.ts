@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment.prod';
 
 export interface DashboardStatsResponse {
   kgRecuperados: number;
@@ -15,7 +16,7 @@ export interface DashboardStatsResponse {
 })
 export class DashboardService {
   // 👇 IMPORTANTE: URL ABSOLUTA AL BACKEND
-  private baseUrl = 'http://localhost:4000/api/dashboard';
+  private baseUrl = '${environment.apiUrl}/api/dashboard';
 
   constructor(private http: HttpClient) {}
 

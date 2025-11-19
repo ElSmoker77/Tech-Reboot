@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment.prod';
 
 export interface Componente {
   _id?: string;
@@ -27,7 +28,7 @@ const ADMIN_DOMAINS = ['@techreboot-admin.cl'];
 @Injectable({ providedIn: 'root' })
 export class ComponenteServicio {
   // URL base del backend
-  private apiUrl = 'http://localhost:4000/api/componentes';
+  private apiUrl = '${environment.apiUrl}/api/componentes';
 
   constructor(private http: HttpClient) {}
 

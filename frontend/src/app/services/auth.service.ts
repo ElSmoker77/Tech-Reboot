@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
+import { environment } from '../../environments/environment.prod';
 
 interface RegisterPayload {
   nombre: string;
@@ -29,7 +30,7 @@ interface AuthResponse {
 export class AuthService {
   // 👀 Asegúrate que tu backend realmente corre en http://localhost:4000
   // y que montaste las rutas como: app.use('/api/auth', authRoutes)
-  private apiUrl = 'http://localhost:4000/api/auth';
+  private apiUrl = '${environment.apiUrl}/api/auth';
 
   constructor(private http: HttpClient) {}
 
