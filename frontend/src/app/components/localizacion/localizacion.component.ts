@@ -77,20 +77,20 @@ export class LocalizacionComponent implements AfterViewInit, OnDestroy {
     // Puntos de acopio
     const puntos = [
       // Punto Angol, Depa Isa
-      { nombre: 'Tech Reboot Centro', coords: [-37.789443, -72.697032] },
+      { nombre: 'Condominio Las Rocas 1', coords: [-37.789443, -72.697032] },
       // Punto Angol, Casa Fercita ñinda <3
-      { nombre: 'Tech Reboot Este', coords: [-37.816015, -72.709995] },
+      { nombre: 'Pje Vaticano N1496', coords: [-37.816015, -72.709995] },
       // Punto Valle San Juan, Casa Jean
-      { nombre: 'Punto de Acopio Principal', coords: [-37.855140, -72.692049] },
+      { nombre: 'Valle San Juan P 132', coords: [-37.855140, -72.692049] },
       // Punto Los Sauces, Casa Maty
-      { nombre: 'Punto de Acopio Los Sauces', coords: [-37.97734679105822, -72.84440895139338] },
+      { nombre: 'AV. Cementerio N1247', coords: [-37.97734679105822, -72.84440895139338] },
       // Punto Purén, Casa Ale
-      { nombre: 'Punto de Acopio Puren', coords: [-38.03517155770511, -73.06945601405839] }
+      { nombre: 'Saavedra N640', coords: [-38.03517155770511, -73.06945601405839] }
     ];
 
     const marcadores = puntos.map(p =>
       L.marker(p.coords as L.LatLngExpression, { icon })
-        .bindPopup(`<b>${p.nombre}</b><br>Punto de reciclaje`)
+        .bindPopup(`<b>${p.nombre}</b><br>(Lunes-Viernes de 10:00 a 19:00)`)
         .addTo(this.map)
     );
 

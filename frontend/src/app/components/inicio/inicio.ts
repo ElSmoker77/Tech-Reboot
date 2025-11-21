@@ -15,10 +15,18 @@ import {
   DashboardStatsResponse,
 } from '../../services/dashboard.service';
 
-import { AuthService } from '../../services/auth.service'; // 👈 versión pro
+import { AuthService } from '../../services/auth.service';
 
 type Stat = { label: string; value: number };
 type InfoTab = 'economia' | 'degradacion' | 'preacopio';
+
+type TutorialMini = {
+  id: string;
+  titulo: string;
+  miniatura: string;
+  watchUrl: string;
+  canal?: string;
+};
 
 /** Card reutilizable */
 @Component({
@@ -70,6 +78,72 @@ export class TechRebootComponent implements OnInit {
 
   // pestaña seleccionada en la sección Educación
   infoTabSeleccionado: InfoTab = 'economia';
+
+  // 🔁 estado de visibilidad de la sección de tutoriales
+  mostrarTutoriales = false;
+
+  // 🎥 Tutoriales destacados (mini versión)
+
+    tutorialesDestacados: TutorialMini[] = [
+      {
+        id: 'PFl44fBRi2w',
+        titulo: 'Aprendiendo sobre reciclaje de aparatos electrónicos y eléctricos',
+        miniatura: 'https://img.youtube.com/vi/PFl44fBRi2w/hqdefault.jpg',
+        watchUrl: 'https://www.youtube.com/watch?v=PFl44fBRi2w',
+        canal: 'Comunicación Hélice',
+      },
+      {
+        id: 'ztKdciFqMEg',
+        titulo: '¿Reciclaje de componentes electrónicos?',
+        miniatura: 'https://img.youtube.com/vi/ztKdciFqMEg/hqdefault.jpg',
+        watchUrl: 'https://www.youtube.com/watch?v=ztKdciFqMEg',
+        canal: 'Kit electrónica',
+      },
+      {
+        id: '8FKjY6u1eGo',
+        titulo: 'Reciclar Equipos Viejos. Componentes Electrónicos y Piezas',
+        miniatura: 'https://img.youtube.com/vi/8FKjY6u1eGo/hqdefault.jpg',
+        watchUrl: 'https://www.youtube.com/watch?v=8FKjY6u1eGo',
+        canal: 'El Taller de Jesus Rojas',
+      },
+      {
+        id: 'Dmm8r3eaJsQ',
+        titulo: 'Basura electrónica',
+        miniatura: 'https://img.youtube.com/vi/Dmm8r3eaJsQ/hqdefault.jpg',
+        watchUrl: 'https://www.youtube.com/watch?v=Dmm8r3eaJsQ',
+        canal: 'Tu Club Tecnológico',
+      },
+
+      {
+        id: 'vICswvJa-Ko',
+        titulo: '¿Cómo reciclar componentes electrónicos?',
+        miniatura: 'https://img.youtube.com/vi/vICswvJa-Ko/hqdefault.jpg',
+        watchUrl: 'https://www.youtube.com/watch?v=vICswvJa-Ko',
+        canal: 'Mundo Electrónica',
+      },
+      {
+        id: 'Ir7fa1E3xDg',
+        titulo: 'Reciclaje tecnológico - Día a Día - Teleamazonas',
+        miniatura: 'https://img.youtube.com/vi/Ir7fa1E3xDg/hqdefault.jpg',
+        watchUrl: 'https://www.youtube.com/watch?v=Ir7fa1E3xDg',
+        canal: 'Día a Día - Teleamazonas',
+      },
+      {
+        id: 'dETYUOtWlhI',
+        titulo: 'Cómo Hacer un Mini Robot Araña Casero',
+        miniatura: 'https://img.youtube.com/vi/dETYUOtWlhI/hqdefault.jpg',
+        watchUrl: 'https://www.youtube.com/watch?v=dETYUOtWlhI',
+        canal: 'Proyectos Caseros',
+      },
+      {
+        id: 'FtS2fuveBIw',
+        titulo: 'Basura Tecnológica: La intoxicación silenciosa',
+        miniatura: 'https://img.youtube.com/vi/FtS2fuveBIw/hqdefault.jpg',
+        watchUrl: 'https://www.youtube.com/watch?v=FtS2fuveBIw',
+        canal: 'Tecnonauta',
+      }
+    ];
+
 
   placeholders = {
     heroImage:
@@ -133,6 +207,21 @@ export class TechRebootComponent implements OnInit {
     this.infoTabSeleccionado = tab;
   }
 
+  // 🔁 Mostrar / ocultar panel de tutoriales
+  toggleTutoriales(): void {
+    this.mostrarTutoriales = !this.mostrarTutoriales;
+
+    if (this.mostrarTutoriales) {
+      // pequeño scroll para que se vea el panel cuando se abre
+      setTimeout(() => {
+        const el = document.getElementById('tutoriales');
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 0);
+    }
+  }
+
   // 🚀 Versión PRO: decide destino según backend
   async irARegistroComponentes() {
     // si no está logueado → login
@@ -144,10 +233,8 @@ export class TechRebootComponent implements OnInit {
     const esAdmin = await this.auth.isAdminFromApi();
 
     if (esAdmin) {
-      // 👑 Admin
       this.router.navigate(['/admin/componentes']);
     } else {
-      // 👤 Usuario normal
       this.router.navigate(['/componentes']);
     }
   }

@@ -23,6 +23,9 @@ export class AdminContactosComponent implements OnInit {
   toastMessage = '';
   toastType: 'success' | 'error' = 'success';
 
+  // 🔍 Mensaje seleccionado para ver detalle
+  mensajeSeleccionado: MensajeContacto | null = null;
+
   constructor(
     private contactService: ContactService,
     private datePipe: DatePipe
@@ -54,6 +57,16 @@ export class AdminContactosComponent implements OnInit {
     return (
       this.datePipe.transform(fecha, 'dd/MM/yyyy HH:mm', 'es-CL') || fecha
     );
+  }
+
+  // 👉 abrir panel de detalle
+  verDetalle(mensaje: MensajeContacto): void {
+    this.mensajeSeleccionado = mensaje;
+  }
+
+  // 👉 cerrar panel de detalle
+  cerrarDetalle(): void {
+    this.mensajeSeleccionado = null;
   }
 
   private showToast(type: 'success' | 'error', message: string): void {

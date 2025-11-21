@@ -167,7 +167,7 @@
 }
 
 /* ============================
-   RESPONSIVE
+   RESPONSIVE (versión original)
 ============================ */
 
 @media (max-width: 992px) {
@@ -276,4 +276,66 @@
 }
 
 
+/* ============================
+   RESPONSIVE EXTRA (MOBILE / TABLET)
+   👉 Último bloque: manda en pantallas chicas
+============================ */
 
+/* Tablets y pantallas medianas */
+@media (max-width: 992px) {
+  .componentes-section {
+    padding: 0.75rem 1rem;
+  }
+
+  .componentes-form .row.g-3 {
+    grid-template-columns: 1fr;
+    column-gap: 1.5rem;
+  }
+
+  .componentes-form__header {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .componentes-form .form-control,
+  .componentes-form .form-select {
+    width: 100%;
+  }
+}
+
+/* Teléfonos */
+@media (max-width: 640px) {
+  .componentes-section {
+    padding: 0.75rem 0.75rem;
+  }
+
+  .componentes-form__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .componentes-form__header h2 {
+    font-size: 1.15rem;
+  }
+
+  .componentes-form__subtitle {
+    font-size: 0.8rem;
+  }
+
+  .componentes-form .row.g-3 {
+    grid-template-columns: 1fr;
+    column-gap: 1rem;
+    row-gap: 0.85rem;
+  }
+
+  .componentes-form .form-control,
+  .componentes-form .form-select,
+  .componentes-form textarea {
+    width: 100%;      /* 📱 inputs a lo ancho en móvil */
+  }
+
+  .form-group-descripcion textarea.form-control {
+    min-height: 110px;   /* un poquito más alta en móvil para escribir cómodo */
+  }
+}

@@ -11,10 +11,11 @@
   box-sizing: border-box;
 }
 
+/* WRAPPER GENERAL DEL MAPA */
 .map-wrapper {
   position: relative;
   width: 100%;
-  aspect-ratio: 5 / 3;
+  aspect-ratio: 5 / 3; /* Desktop: panorámico */
   border: 3px solid #a2d9a2;
   border-radius: 16px;
   overflow: hidden;
@@ -24,7 +25,7 @@
   transition: all 0.3s ease;
 }
 
-/* Hover SIN aumento de tamaño */
+/* Hover SIN zoom */
 .map-wrapper:hover {
   box-shadow:
     0 20px 45px rgba(11, 125, 62, 0.25),
@@ -43,6 +44,7 @@
   background: none !important;
 }
 
+/* 🎯 ANIMACIÓN */
 @keyframes pulseArrow {
   0%, 100% {
     transform: scale(1);
@@ -51,5 +53,42 @@
   50% {
     transform: scale(1.3);
     opacity: 1;
+  }
+}
+
+
+/* 📱📱 RESPONSIVE (MOBILE FIRST) */
+
+/* 👉 Teléfonos (pantallas pequeñas) */
+@media (max-width: 640px) {
+  .mapa-card {
+    padding: 12px 14px;
+    border-radius: 14px;
+  }
+
+  .map-wrapper {
+    aspect-ratio: 3 / 4; /* Más vertical en móviles */
+    border-width: 2px;
+    border-radius: 12px;
+  }
+
+  #map,
+  .leaflet-container {
+    height: 100% !important;
+  }
+}
+
+/* 👉 Tablets (pantallas medianas) */
+@media (max-width: 900px) {
+  .map-wrapper {
+    aspect-ratio: 4 / 3;
+    border-width: 2px;
+  }
+}
+
+/* 👉 Pantallas chicas de laptop */
+@media (max-width: 1200px) {
+  .mapa-card {
+    max-width: 850px;
   }
 }

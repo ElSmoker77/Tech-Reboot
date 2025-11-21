@@ -1,0 +1,14 @@
+@keyframes slideLeft {
+  0% {
+    transform: translateX(-16px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-left {
+  animation: slideLeft 0.25s ease-out;
+}

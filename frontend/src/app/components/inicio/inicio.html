@@ -1,7 +1,8 @@
 <div class="min-h-screen w-full font-sans text-gray-900">
   <!-- NAVBAR -->
   <header class="sticky top-0 z-50 backdrop-blur bg-white/70 border-b border-gray-100">
-    <div class="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
+    <div class="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between gap-4">
+      <!-- IZQUIERDA: Logo -->
       <a href="#inicio" class="flex items-center gap-2">
         <span class="text-xl">♻️</span>
         <span class="font-bold">Tech Reboot Acopio</span>
@@ -16,19 +17,109 @@
         <a href="#contacto" class="hover:text-green-700">Contacto</a>
       </nav>
 
-      <!-- Botón directo: Registrar componente -->
-<div>
-  <button
-    type="button"
-    (click)="irARegistroComponentes()"
-    class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-2xl transition border bg-green-600 text-white border-green-600 hover:bg-green-700"
+      <!-- DERECHA: Botón Tutoriales + Botón Registrar componente -->
+      <div class="flex items-center gap-3">
+        <!-- Botón Tutoriales (hamburguesa + texto) -->
+        <button
+          type="button"
+          (click)="toggleTutoriales()"
+          class="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-xl border border-gray-300 bg-white hover:bg-gray-100"
+        >
+          <i class="bi bi-list text-lg"></i>
+          <span>Tutoriales</span>
+        </button>
+
+        <!-- Botón directo: Registrar componente -->
+        <button
+          type="button"
+          (click)="irARegistroComponentes()"
+          class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-2xl transition border bg-green-600 text-white border-green-600 hover:bg-green-700"
+        >
+          <i class="bi bi-box-seam mr-2"></i>
+          Registrar componente
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 🔹 PANEL TUTORIALES FLOTANTE (sigue el scroll a la derecha) -->
+  <div
+    *ngIf="mostrarTutoriales"
+    class="fixed top-[76px] right-4 z-50 w-72 rounded-2xl bg-white shadow-xl border border-gray-100 overflow-hidden animate-slide-left"
   >
-    <i class="bi bi-box-seam mr-2"></i>
-    Registrar componente
-  </button>
-</div>
-</div>
-</header>
+    <div class="px-4 py-3 border-b border-gray-100 flex items-center justify-between">
+      <div>
+        <h2 class="text-xs font-semibold tracking-[0.18em] text-emerald-700 uppercase flex items-center gap-1.5">
+          <span>🎓</span>
+          <span>Tutoriales</span>
+        </h2>
+        <p class="mt-1 text-[11px] text-slate-500">
+          Videos rápidos sobre como reciclar, separar componentes y cómo reutilizarlos.
+        </p>
+      </div>
+      <button
+        type="button"
+        (click)="toggleTutoriales()"
+        class="inline-flex items-center justify-center rounded-full p-1 hover:bg-gray-100"
+      >
+        ✕
+      </button>
+    </div>
+
+    <!-- Lista pequeña de videos -->
+    <div class="divide-y divide-slate-100 max-h-[350px] overflow-y-auto">
+      <article
+        *ngFor="let t of tutorialesDestacados"
+        class="flex gap-3 px-4 py-3 hover:bg-slate-50 transition cursor-pointer"
+      >
+        <div class="w-20 h-12 flex-shrink-0 rounded-md overflow-hidden bg-slate-100">
+          <img
+            [src]="t.miniatura"
+            [alt]="t.titulo"
+            class="w-full h-full object-cover"
+          />
+        </div>
+        <div class="flex-1 min-w-0">
+          <h3 class="text-[12px] font-semibold text-slate-900 line-clamp-2">
+            {{ t.titulo }}
+          </h3>
+          <div class="mt-1 flex items-center justify-between">
+            <span class="text-[11px] text-slate-500 truncate">
+              {{ t.canal || 'Tech Reboot' }}
+            </span>
+            <a
+              [href]="t.watchUrl"
+              target="_blank"
+              rel="noopener"
+              class="ml-2 inline-flex items-center text-[11px] font-medium text-emerald-700 hover:text-emerald-800"
+            >
+              <i class="bi bi-youtube me-1"></i>
+              Ver
+            </a>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="px-4 py-2.5 border-t border-gray-100 flex items-center justify-between">
+      <a
+        href="https://www.youtube.com/watch?v=aoiIok4TXrA&list=PLt4KBHk_wKDaLcw_g4Kz5GvAb49zLCtRz&pp=gAQB"
+        target="_blank"
+        rel="noopener"
+        class="text-[11px] font-medium text-emerald-700 hover:text-emerald-800 underline"
+      >
+        Ver todos
+      </a>
+
+      <button
+        type="button"
+        (click)="toggleTutoriales()"
+        class="text-[11px] text-slate-500 hover:text-slate-700"
+      >
+        Ocultar
+      </button>
+    </div>
+  </div>
 
   <main>
     <!-- HERO -->
@@ -50,17 +141,20 @@
             reacondicionamos equipos y derivamos el resto a reciclaje
             certificado.
           </p>
-          <div class="mt-6 flex gap-3">
+          <div class="mt-6 flex flex-wrap gap-3">
             <a
               href="#mapa"
               class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-2xl transition border bg-green-600 text-white border-green-600 hover:bg-green-700"
-              >Ver mapa de acopios</a
             >
+              Ver mapa de acopios
+            </a>
             <a
               href="#educacion"
               class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-2xl transition border bg-white text-gray-900 border-gray-300 hover:bg-gray-50"
-              >¿Por qué reciclar?</a
             >
+              ¿Por qué reciclar?
+            </a>
+            <!-- 🔹 botón de tutoriales eliminado aquí -->
           </div>
           <ul class="mt-6 space-y-2 text-sm">
             <li class="flex items-center gap-2">
@@ -147,7 +241,7 @@
             *ngFor="let s of stats"
             class="rounded-2xl bg-white/70 shadow-sm border border-white/60 p-6 text-center backdrop-blur-sm"
           >
-            <div class="text-4xl font-extrabold">
+            <div class="text-4l font-extrabold">
               {{ fmt(s.value) }}
             </div>
             <div class="mt-2 text-sm text-gray-600">
@@ -268,23 +362,28 @@
       class="border-y border-green-100/60 bg-white/40 backdrop-blur-sm w-full"
     >
       <div class="mx-auto max-w-7xl px-4 py-16">
-        <div class="flex items-center gap-2 mb-4">
+        <!-- Título centrado -->
+        <div class="flex items-center justify-center gap-2 mb-4">
           <span class="text-xl" aria-hidden="true">📍</span>
-          <h2 class="text-3xl font-bold">Mapa de puntos de acopio</h2>
+          <h2 class="text-3xl font-bold text-center">Mapa de puntos de acopio</h2>
         </div>
 
-        <p class="text-gray-700 mb-4 text-sm md:text-base max-w-2xl">
+        <!-- Texto centrado -->
+        <p class="text-gray-700 mb-8 text-sm md:text-base max-w-2xl mx-auto text-center">
           Encuentra los puntos de reciclaje más cercanos a ti en el mapa
           interactivo. A medida que abramos nuevos puntos de acopio, los iremos
           sumando aquí.
         </p>
 
-        <div class="w-full">
-          <app-localizacion></app-localizacion>
+        <!-- Mapa centrado, con ancho máximo -->
+        <div class="w-full flex justify-center">
+          <div class="w-full max-w-5xl">
+            <app-localizacion></app-localizacion>
+          </div>
         </div>
       </div>
     </section>
-
+    
     <!-- CONTACTO -->
     <section id="contacto" class="mx-auto max-w-7xl px-4 py-10">
       <div class="grid lg:grid-cols-2 gap-10 items-stretch h-full">

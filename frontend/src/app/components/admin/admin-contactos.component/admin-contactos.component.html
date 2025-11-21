@@ -44,13 +44,14 @@
         <tr>
           <th style="width: 20%;">Nombre</th>
           <th style="width: 20%;">Correo</th>
-          <th style="width: 40%;">Mensaje</th>
-          <th style="width: 20%;">Fecha</th>
+          <th style="width: 35%;">Mensaje</th>
+          <th style="width: 15%;">Fecha</th>
+          <th style="width: 10%;">Acciones</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngIf="mensajes.length === 0">
-          <td colspan="4" class="text-center py-3">
+          <td colspan="5" class="text-center py-3">
             No hay mensajes aún.
           </td>
         </tr>
@@ -64,10 +65,63 @@
             </span>
           </td>
           <td>{{ fmtFecha(m.createdAt) }}</td>
+          <td class="admin-table__actions">
+            <button
+              type="button"
+              (click)="verDetalle(m)"
+            >
+              <i class="bi bi-eye"></i>
+              <span class="d-none d-md-inline ms-1">Ver</span>
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
   </div>
+
+  <!-- 🔍 PANEL DETALLE MENSAJE -->
+  <section
+    *ngIf="mensajeSeleccionado"
+    class="admin-contactos__detalle"
+  >
+    <header>
+      <div>
+        <h3>Detalle del mensaje</h3>
+        <p class="detalle-sub">
+          Mensaje enviado el
+          <strong>{{ fmtFecha(mensajeSeleccionado.createdAt) }}</strong>
+        </p>
+      </div>
+      <button type="button" (click)="cerrarDetalle()">
+        <i class="bi bi-x-lg me-1"></i>
+        Cerrar
+      </button>
+    </header>
+
+    <div class="detalle-grid">
+      <div>
+        <h4>Nombre</h4>
+        <p>{{ mensajeSeleccionado.nombre }}</p>
+      </div>
+
+      <div>
+        <h4>Correo</h4>
+        <p>{{ mensajeSeleccionado.correo }}</p>
+      </div>
+
+      <div *ngIf="mensajeSeleccionado.telefono">
+        <h4>Teléfono</h4>
+        <p>{{ mensajeSeleccionado.telefono }}</p>
+      </div>
+
+      <div class="detalle-mensaje">
+        <h4>Mensaje completo</h4>
+        <p>
+          {{ mensajeSeleccionado.mensaje }}
+        </p>
+      </div>
+    </div>
+  </section>
 
   <!-- ✅ Toast flotante local -->
   <div

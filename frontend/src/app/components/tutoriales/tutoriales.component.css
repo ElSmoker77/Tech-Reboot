@@ -1,68 +1,22 @@
-.video-card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-  border-radius: 12px;
-  overflow: hidden;
-  background: #fff;
+/* Contenedor general tipo YouTube */
+.youtube-page {
+  background-color: #f9f9f9;
 }
 
-.video-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.15);
+/* Contenedor centrado, similar a layout de YouTube */
+.youtube-layout {
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
-.video-thumbnail img {
-  width: 100%;
-  height: 170px;
-  object-fit: cover;
-  border-radius: 10px 10px 0 0;
-}
-
-.overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.45);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  border-radius: 10px 10px 0 0;
-}
-
-.video-thumbnail:hover .overlay {
-  opacity: 1;
-}
-
-.ver-btn {
-  font-weight: 600;
-  border-radius: 50px;
-  transition: transform 0.2s ease, background-color 0.3s ease;
-  padding: 8px 20px;
-}
-
-.ver-btn:hover {
-  transform: scale(1.1);
-  background-color: #09a955 !important;
-  color: white;
-}
-
-.modal-content {
-  border-radius: 12px;
-  overflow: hidden;
-  background: #000;
-  border: none;
-}
-
-.modal-body iframe {
-  border-radius: 0 0 12px 12px;
-  width: 100%;
-  height: 360px;
-}
-
+/* Título superior */
 .titulo-principal {
   color: #0b7d3e;
   font-weight: 600;
   letter-spacing: 0.5px;
 }
 
+/* Botón volver */
 .boton-volver {
   border-radius: 8px;
   font-weight: 500;
@@ -70,8 +24,6 @@
   color: #0b7d3e;
   background-color: white;
   transition: all 0.3s ease;
-  position: relative;
-  z-index: 10;
 }
 
 .boton-volver:hover {
@@ -80,20 +32,127 @@
   transform: translateY(-2px);
 }
 
-.animate__fadeInUp {
-  animation-duration: 0.8s;
+/* Tarjeta del video principal */
+.main-video-card {
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
 }
 
-@media (max-width: 768px) {
-  .video-thumbnail img {
-    height: 140px;
+.main-video-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.main-video-info {
+  border-top: 1px solid #f0f0f0;
+}
+
+.main-video-title {
+  font-weight: 600;
+}
+
+/* Avatar del canal (círculo tipo YouTube) */
+.channel-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: #0b7d3e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.channel-name {
+  font-size: 14px;
+}
+
+.channel-sub {
+  font-size: 11px;
+}
+
+/* Descripción del video */
+.video-description {
+  line-height: 1.4;
+}
+
+/* Lista de videos a la derecha (Siguientes) */
+.video-list {
+  /* Deja que crezca con la página para ver todos completos */
+  max-height: none;
+}
+
+/* Item de la lista */
+.video-item {
+  cursor: pointer;
+  border-radius: 10px;
+  padding: 6px;
+  margin-bottom: 8px;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.video-item:hover {
+  background-color: #f1f1f1;
+  transform: translateY(-1px);
+}
+
+.video-item.active {
+  background-color: #e2f5ea;
+}
+
+/* Miniatura del video (a la derecha) 
+   — ahora ocupa el ancho disponible del contenedor */
+.video-thumb img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+  background-color: #ddd;
+}
+
+/* Textos de cada video */
+.video-meta {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.video-title {
+  margin-bottom: 2px;
+}
+
+.video-channel {
+  font-size: 11px;
+}
+
+/* Responsive */
+@media (max-width: 991.98px) {
+  .youtube-layout {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
   }
 
-  .modal-body iframe {
-    height: 260px;
+  .video-thumb img {
+    width: 140px;
+    aspect-ratio: 16 / 9;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .video-item {
+    padding: 4px;
   }
 
-  .boton-volver {
-    width: 90%;
+  .video-thumb img {
+    width: 130px;
+    aspect-ratio: 16 / 9;
   }
 }
